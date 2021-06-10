@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="204ce7d0-4401-48f7-9241-3473b0197e0e" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:8735/LiveStockDataSvc/" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="item1.xsd" MetadataType="Schema" ID="d9951e79-d457-4ce3-a1e3-b16b6c98b91e" SourceId="1" SourceUrl="http://localhost:8735/LiveStockDataSvc/?xsd=xsd1" />
+    <MetadataFile FileName="LiveStockDataSvc.wsdl" MetadataType="Wsdl" ID="921b561d-6f61-4ec4-9356-5c7f2b302dfa" SourceId="1" SourceUrl="http://localhost:8735/LiveStockDataSvc/?wsdl" />
+    <MetadataFile FileName="item.xsd" MetadataType="Schema" ID="d86d877d-d929-408e-a3c7-2040e8f451b1" SourceId="1" SourceUrl="http://localhost:8735/LiveStockDataSvc/?xsd=xsd0" />
+    <MetadataFile FileName="item.disco" MetadataType="Disco" ID="57873dea-37c8-47e5-9cda-5aefdba4d390" SourceId="1" SourceUrl="http://localhost:8735/LiveStockDataSvc/?disco" />
+    <MetadataFile FileName="item2.xsd" MetadataType="Schema" ID="571eab13-7764-4985-ab4e-bdce90198d23" SourceId="1" SourceUrl="http://localhost:8735/LiveStockDataSvc/?xsd=xsd2" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

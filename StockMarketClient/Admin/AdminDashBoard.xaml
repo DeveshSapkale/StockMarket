@@ -1,0 +1,62 @@
+﻿<Window x:Class="StockMarketClient.Admin.AdminDashBoard"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:StockMarketClient.Admin"
+        mc:Ignorable="d"
+        Title="AdminDashBoard" Height="450" Width="800">
+    <TabControl Name="Tabs1" TabStripPlacement="Top" Background="LightGray" BorderBrush="Blue" Margin="10,10,0,5">
+        <TabItem Header="DashBoard" IsSelected="True" Background="Gray">
+            <Grid HorizontalAlignment="Left" Height="309" Margin="10,18,0,0" VerticalAlignment="Top" Width="748"/>
+
+        </TabItem>
+        <TabItem Header="Create Stock" Background="Gray">
+            <Grid HorizontalAlignment="Left" Height="332" Margin="12,28,0,0" VerticalAlignment="Top" Width="746">
+                <Label Content="Company: " HorizontalAlignment="Left" Margin="29,24,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.724,0.211" Width="62"/>
+                <TextBox x:Name="txtCompany" HorizontalAlignment="Left" Height="23" Margin="29,54,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="225"/>
+                <Label Content="Symbol: " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="398,24,0,0"/>
+                <TextBox x:Name="txtSymbol" HorizontalAlignment="Left" Height="23" Margin="398,55,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="185"/>
+                <Label Content="Volume: " HorizontalAlignment="Left" Margin="29,115,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="txtVolume" HorizontalAlignment="Left" Height="23" Margin="29,145,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="225" KeyDown="txtVolume_KeyDown"/>
+                <Label Content="Initial Price: " HorizontalAlignment="Left" Margin="398,115,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="txtInitPrice" HorizontalAlignment="Left" Height="23" Margin="398,145,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="185" KeyDown="txtInitPrice_KeyDown"/>
+                <Label Content="Market Capital: " HorizontalAlignment="Left" Margin="29,220,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="lblMktCap" Content="0$" HorizontalAlignment="Left" Margin="140,220,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.255,0.18"/>
+                <ComboBox x:Name="cbxExchange" HorizontalAlignment="Left" Margin="469,220,0,0" VerticalAlignment="Top" Width="114"/>
+                <Label Content="Exchange: " HorizontalAlignment="Left" Margin="398,217,0,0" VerticalAlignment="Top"/>
+                <Button x:Name="btnCreateStock" Content="Create" HorizontalAlignment="Left" Margin="267,293,0,0" VerticalAlignment="Top" Width="177" Click="btnCreateStock_Click"/>
+            </Grid>
+
+        </TabItem>
+
+        <TabItem Header="Market Off Dates" Background="Gray">
+            <Grid HorizontalAlignment="Left" Height="312" Margin="10,15,0,0" VerticalAlignment="Top" Width="748">
+                <Calendar x:Name="clnDatePicker" HorizontalAlignment="Left" Margin="394,10,0,0" VerticalAlignment="Top" SelectionMode="SingleDate" SelectedDatesChanged="Calendar_SelectedDatesChanged"/>
+                <DataGrid HorizontalAlignment="Left" Height="100" Margin="142,212,0,0" VerticalAlignment="Top" Width="389"/>
+                <DataGrid x:Name='MarketDateOffGrid' AutoGenerateColumns="False"
+                     Margin="142,212,0,0" >
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Width="*" Header="Off Date" Binding="{Binding OffDate}" />
+                        <DataGridTextColumn Width="*" Header="Comment" Binding="{Binding Comment}" />
+                        <DataGridTemplateColumn Width="*" Header="Delete">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Delete" Click="btnDeleteDateOff_ClickEvents"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+
+                </DataGrid>
+                <Label Content="Choose Date to set Market Off:" HorizontalAlignment="Left" Margin="26,41,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.078,0.836"/>
+                <TextBox x:Name="txtDateOff" HorizontalAlignment="Left" Height="23" Margin="234,41,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+                <Button x:Name="btnAddDateOff" Content="Add" HorizontalAlignment="Left" Margin="234,171,0,0" VerticalAlignment="Top" Width="75" Click="btnAddDateOff_Click"/>
+                <Label Content="Comment: " HorizontalAlignment="Left" Margin="132,99,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="txtComment" HorizontalAlignment="Left" Height="40" Margin="234,99,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+            </Grid>
+
+        </TabItem>
+
+    </TabControl>
+</Window>

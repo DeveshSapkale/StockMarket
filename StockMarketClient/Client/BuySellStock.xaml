@@ -1,0 +1,27 @@
+﻿<Window x:Class="StockMarketClient.Client.BuySellStock"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:StockMarketClient.Client"
+        mc:Ignorable="d"
+        Title="BuySellStock" Height="450" Width="800">
+    <Grid>
+        <Button x:Name="btnBackToDashBoard" Content="Back To DashBoard" HorizontalAlignment="Left" Margin="28,29,0,0" VerticalAlignment="Top" Width="141" Click="btnBackToDashBoard_Click"/>
+        <Button x:Name="btnBuySell" Content="Buy" HorizontalAlignment="Left" Margin="308,364,0,0" VerticalAlignment="Top" Width="75" Click="btnBuySell_Click"/>
+        <Label x:Name="lblShareName" Content="My Share Company Name" HorizontalAlignment="Left" Margin="153,72,0,0" VerticalAlignment="Top" Width="421" FontSize="18" />
+        <Label Content="Shares:" HorizontalAlignment="Left" Margin="117,164,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cbxExchange" HorizontalAlignment="Left" Margin="177,167,0,0" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="418,167,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Price:" HorizontalAlignment="Left" Margin="126,230,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cbxPriceType" HorizontalAlignment="Left" Margin="177,233,0,0" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="418,230,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Order Validity:" HorizontalAlignment="Left" Margin="80,295,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cbxOrderValidity" HorizontalAlignment="Left" Margin="177,295,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lblAvailableAmount" Content="Amount: " HorizontalAlignment="Left" Margin="418,292,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblShareCount" Content="Share Count:" Visibility="Hidden" HorizontalAlignment="Left" Margin="418,172,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblShareOperation" Content="Sell/Buy Share" HorizontalAlignment="Left" Margin="308,29,0,0" VerticalAlignment="Top" Width="205" FontSize="18"/>
+
+
+    </Grid>
+</Window>

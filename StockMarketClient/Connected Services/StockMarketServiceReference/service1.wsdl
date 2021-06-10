@@ -1,0 +1,267 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="StockMarketSvc" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import namespace="http://tempuri.org/" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/DataLayer.Entities" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IStockMarket_Login_InputMessage">
+    <wsdl:part name="parameters" element="tns:Login" />
+  </wsdl:message>
+  <wsdl:message name="IStockMarket_Login_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="IStockMarket_Register_InputMessage">
+    <wsdl:part name="parameters" element="tns:Register" />
+  </wsdl:message>
+  <wsdl:message name="IStockMarket_Register_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterResponse" />
+  </wsdl:message>
+  <wsdl:message name="IStockMarket_CreateStock_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateStock" />
+  </wsdl:message>
+  <wsdl:message name="IStockMarket_CreateStock_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateStockResponse" />
+  </wsdl:message>
+  <wsdl:message name="IStockMarket_UpdateStock_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateStock" />
+  </wsdl:message>
+  <wsdl:message name="IStockMarket_UpdateStock_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateStockResponse" />
+  </wsdl:message>
+  <wsdl:message name="IStockMarket_GetStocks_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetStocks" />
+  </wsdl:message>
+  <wsdl:message name="IStockMarket_GetStocks_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetStocksResponse" />
+  </wsdl:message>
+  <wsdl:message name="IStockMarket_GetStock_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetStock" />
+  </wsdl:message>
+  <wsdl:message name="IStockMarket_GetStock_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetStockResponse" />
+  </wsdl:message>
+  <wsdl:message name="IStockMarket_DeleteStock_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteStock" />
+  </wsdl:message>
+  <wsdl:message name="IStockMarket_DeleteStock_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteStockResponse" />
+  </wsdl:message>
+  <wsdl:message name="IStockMarket_Add_InputMessage">
+    <wsdl:part name="parameters" element="tns:Add" />
+  </wsdl:message>
+  <wsdl:message name="IStockMarket_Add_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddResponse" />
+  </wsdl:message>
+  <wsdl:message name="IStockMarket_Delete_InputMessage">
+    <wsdl:part name="parameters" element="tns:Delete" />
+  </wsdl:message>
+  <wsdl:message name="IStockMarket_Delete_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteResponse" />
+  </wsdl:message>
+  <wsdl:message name="IStockMarket_GetStockMarketOffDates_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetStockMarketOffDates" />
+  </wsdl:message>
+  <wsdl:message name="IStockMarket_GetStockMarketOffDates_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetStockMarketOffDatesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IStockMarket_GetMemberHoldings_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetMemberHoldings" />
+  </wsdl:message>
+  <wsdl:message name="IStockMarket_GetMemberHoldings_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetMemberHoldingsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IStockMarket_SellShare_InputMessage">
+    <wsdl:part name="parameters" element="tns:SellShare" />
+  </wsdl:message>
+  <wsdl:message name="IStockMarket_SellShare_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SellShareResponse" />
+  </wsdl:message>
+  <wsdl:message name="IStockMarket_BuyShare_InputMessage">
+    <wsdl:part name="parameters" element="tns:BuyShare" />
+  </wsdl:message>
+  <wsdl:message name="IStockMarket_BuyShare_OutputMessage">
+    <wsdl:part name="parameters" element="tns:BuyShareResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IStockMarket">
+    <wsdl:operation name="Login">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStockMarket/Login" message="tns:IStockMarket_Login_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStockMarket/LoginResponse" message="tns:IStockMarket_Login_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Register">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStockMarket/Register" message="tns:IStockMarket_Register_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStockMarket/RegisterResponse" message="tns:IStockMarket_Register_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateStock">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStockMarket/CreateStock" message="tns:IStockMarket_CreateStock_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStockMarket/CreateStockResponse" message="tns:IStockMarket_CreateStock_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateStock">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStockMarket/UpdateStock" message="tns:IStockMarket_UpdateStock_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStockMarket/UpdateStockResponse" message="tns:IStockMarket_UpdateStock_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStocks">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStockMarket/GetStocks" message="tns:IStockMarket_GetStocks_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStockMarket/GetStocksResponse" message="tns:IStockMarket_GetStocks_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStock">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStockMarket/GetStock" message="tns:IStockMarket_GetStock_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStockMarket/GetStockResponse" message="tns:IStockMarket_GetStock_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteStock">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStockMarket/DeleteStock" message="tns:IStockMarket_DeleteStock_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStockMarket/DeleteStockResponse" message="tns:IStockMarket_DeleteStock_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Add">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStockMarket/Add" message="tns:IStockMarket_Add_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStockMarket/AddResponse" message="tns:IStockMarket_Add_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStockMarket/Delete" message="tns:IStockMarket_Delete_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStockMarket/DeleteResponse" message="tns:IStockMarket_Delete_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStockMarketOffDates">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStockMarket/GetStockMarketOffDates" message="tns:IStockMarket_GetStockMarketOffDates_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStockMarket/GetStockMarketOffDatesResponse" message="tns:IStockMarket_GetStockMarketOffDates_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMemberHoldings">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStockMarket/GetMemberHoldings" message="tns:IStockMarket_GetMemberHoldings_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStockMarket/GetMemberHoldingsResponse" message="tns:IStockMarket_GetMemberHoldings_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SellShare">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStockMarket/SellShare" message="tns:IStockMarket_SellShare_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStockMarket/SellShareResponse" message="tns:IStockMarket_SellShare_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="BuyShare">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStockMarket/BuyShare" message="tns:IStockMarket_BuyShare_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStockMarket/BuyShareResponse" message="tns:IStockMarket_BuyShare_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IStockMarket" type="tns:IStockMarket">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Login">
+      <soap:operation soapAction="http://tempuri.org/IStockMarket/Login" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Register">
+      <soap:operation soapAction="http://tempuri.org/IStockMarket/Register" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateStock">
+      <soap:operation soapAction="http://tempuri.org/IStockMarket/CreateStock" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateStock">
+      <soap:operation soapAction="http://tempuri.org/IStockMarket/UpdateStock" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStocks">
+      <soap:operation soapAction="http://tempuri.org/IStockMarket/GetStocks" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStock">
+      <soap:operation soapAction="http://tempuri.org/IStockMarket/GetStock" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteStock">
+      <soap:operation soapAction="http://tempuri.org/IStockMarket/DeleteStock" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Add">
+      <soap:operation soapAction="http://tempuri.org/IStockMarket/Add" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <soap:operation soapAction="http://tempuri.org/IStockMarket/Delete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStockMarketOffDates">
+      <soap:operation soapAction="http://tempuri.org/IStockMarket/GetStockMarketOffDates" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMemberHoldings">
+      <soap:operation soapAction="http://tempuri.org/IStockMarket/GetMemberHoldings" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SellShare">
+      <soap:operation soapAction="http://tempuri.org/IStockMarket/SellShare" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BuyShare">
+      <soap:operation soapAction="http://tempuri.org/IStockMarket/BuyShare" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="StockMarketSvc">
+    <wsdl:port name="BasicHttpBinding_IStockMarket" binding="tns:BasicHttpBinding_IStockMarket">
+      <soap:address location="http://localhost:8734/StockMarketSvc/" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/DataLayer.Entities" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/DataLayer.Entities" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="Member">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="EmailId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="IsAdmin" nillable="true" type="xs:boolean" />
+      <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LastSearchAll" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LastSearchHistory" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LastSearchLive" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UserName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Member" nillable="true" type="tns:Member" />
+  <xs:complexType name="Stock">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CompanyName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CreationDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Exchange" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="LivePrice" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Symbol" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Volume" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Stock" nillable="true" type="tns:Stock" />
+  <xs:complexType name="ArrayOfStock">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Stock" nillable="true" type="tns:Stock" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfStock" nillable="true" type="tns:ArrayOfStock" />
+  <xs:complexType name="StockMarketOffDates">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Comment" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CreationDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ModifiedDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="OffDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="StockMarketOffDatesId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="StockMarketOffDates" nillable="true" type="tns:StockMarketOffDates" />
+  <xs:complexType name="ArrayOfStockMarketOffDates">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="StockMarketOffDates" nillable="true" type="tns:StockMarketOffDates" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfStockMarketOffDates" nillable="true" type="tns:ArrayOfStockMarketOffDates" />
+  <xs:complexType name="ArrayOfMemberHolding">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MemberHolding" nillable="true" type="tns:MemberHolding" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMemberHolding" nillable="true" type="tns:ArrayOfMemberHolding" />
+  <xs:complexType name="MemberHolding">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CompanyName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="InvestedAmount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="MemberHoldingId" type="xs:int" />
+      <xs:element minOccurs="0" name="MemberId" type="xs:int" />
+      <xs:element minOccurs="0" name="Quantity" type="xs:int" />
+      <xs:element minOccurs="0" name="StockId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="MemberHolding" nillable="true" type="tns:MemberHolding" />
+  <xs:complexType name="Order">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="MemberId" type="xs:int" />
+      <xs:element minOccurs="0" name="OrderId" type="xs:int" />
+      <xs:element minOccurs="0" name="OrderType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OrderValidity" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PurchaseTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Quantity" type="xs:int" />
+      <xs:element minOccurs="0" name="Status" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="StockId" type="xs:int" />
+      <xs:element minOccurs="0" name="UnitPrice" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Order" nillable="true" type="tns:Order" />
+</xs:schema>
