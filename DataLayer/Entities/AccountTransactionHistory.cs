@@ -18,7 +18,6 @@ namespace DataLayer.Entities
         public decimal Amount { get; set; }
         [DataMember]
         public string Status { get; set; }
-
         [DataMember]
         public DateTime CreationDate { get; set; }
         [DataMember]

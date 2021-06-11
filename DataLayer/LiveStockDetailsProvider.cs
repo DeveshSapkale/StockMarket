@@ -18,6 +18,7 @@ namespace DataLayer
         public static Dictionary<int , SortedSet<StockTradeAsk>> AskedOrder = new Dictionary<int, SortedSet<StockTradeAsk>>();
         public static Dictionary<int , SortedSet<StockTradeBid>> BidedOrder = new Dictionary<int, SortedSet<StockTradeBid>>();
         private static readonly OrderService _orderService = new OrderService();
+        private static readonly AccountService _accountService = new AccountService();
 
         static LiveStockDetailsProvider()
         {
@@ -109,19 +110,25 @@ namespace DataLayer
                 {
                     order.FulfilledQuatity = order.Quantity;
                     if(askItem.AskQuantity == order.Quantity)
-                    _orderService.UpdateOrderStatus(order.OrderId, OrderStatus.COMPLETED.ToString());
+                    {
+                        _accountService.DeductMoney(order.MemberId, order.Quantity * order.UnitPrice);
+                        _orderService.UpdateOrderStatus(order.OrderId, OrderStatus.COMPLETED.ToString());
+                    }
+                    
 
                     askItem.AskQuantity -= order.Quantity;
                     if (askItem.AskQuantity == 0)
                     {
                         RemoveShareBid(order.OrderId, order.StockId);
                         RemoveShareAsk(askItem.OrderId, askItem.StockId);
+                        _accountService.AddMoney(order.MemberId, order.Quantity * order.UnitPrice);
                         _orderService.UpdateOrderStatus(askItem.OrderId, OrderStatus.COMPLETED.ToString());
                     }
                     else
                     {
                         RemoveShareBid(order.OrderId, order.StockId);
                         _orderService.UpdateOrderFulfilment(askItem.OrderId, askItem.AskQuantity);
+                        _accountService.AddMoney(order.MemberId, askItem.AskQuantity * order.UnitPrice);
                         _orderService.UpdateOrderStatus(askItem.OrderId, OrderStatus.PARTIALLY_COMPLETED.ToString());
                     }
                     break;
@@ -129,6 +136,7 @@ namespace DataLayer
                 //partial fullfill Bid case
                 else if(askItem.AskQuantity < (order.Quantity - order.FulfilledQuatity))
                 {
+                    //TODO
                     order.FulfilledQuatity += askItem.AskQuantity;
 
                     RemoveShareAsk(askItem.OrderId, askItem.StockId);
@@ -140,7 +148,7 @@ namespace DataLayer
 
                 }
             }
-           
+            return true;
         }
 
         public static void ResolveOrders()

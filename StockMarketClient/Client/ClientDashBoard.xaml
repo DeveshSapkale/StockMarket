@@ -10,8 +10,23 @@
     <TabControl Name="Tabs2" TabStripPlacement="Top" Background="LightGray" BorderBrush="Blue" Margin="10,10,0,5">
         <TabItem Header="DashBoard" IsSelected="True" Background="Gray">
             <Grid HorizontalAlignment="Left" Height="309" Margin="10,18,0,0" VerticalAlignment="Top" Width="748">
-                <TextBox IsReadOnly="True" x:Name="txtProgress" Text="" HorizontalAlignment="Left" Margin="98,66,0,0" VerticalAlignment="Top"/>
-                <Button Content="Button" HorizontalAlignment="Left" Margin="69,99,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+                <TextBox IsReadOnly="True" x:Name="txtSearchStock" Text="" HorizontalAlignment="Left" Margin="140,20,0,0" VerticalAlignment="Top" Width="330" Height="26"/>
+                <Button x:Name="btnSearchStock" Content="Search" HorizontalAlignment="Left" Margin="503,23,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+                <Label Content="Search Stock" HorizontalAlignment="Left" Margin="43,20,0,0" VerticalAlignment="Top"/>
+                <DataGrid x:Name='stockSearchGrid' AutoGenerateColumns="False"
+                      Margin='10,93,6,-77' >
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Width="*" Header="" Binding="{Binding StockId}" Visibility="Hidden" />
+                        <DataGridTextColumn Width="*" Header="Company Name" Binding="{Binding CompanyName}" />
+                        <DataGridTemplateColumn Width="*" Header="View Details">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="View" Click="btnViewStock_ClickEvents"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
             </Grid>
 
         </TabItem>
@@ -19,11 +34,13 @@
             <Grid>
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                        <ColumnDefinition />
+                        <ColumnDefinition Width="30*" />
+                        <ColumnDefinition Width="48*"/>
+                        <ColumnDefinition Width="11*" />
+                        <ColumnDefinition Width="67*"/>
+                        <ColumnDefinition Width="78*" />
+                        <ColumnDefinition Width="78*" />
+                        <ColumnDefinition Width="78*" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="50"/>
@@ -36,8 +53,8 @@
                       Grid.Column='0'
                       Grid.Row='1'
                       Grid.RowSpan='3'
-                      Grid.ColumnSpan='5'
-                      Margin='8' >
+                      Grid.ColumnSpan='7'
+                      Margin='8,8.4,7.88,8' >
                         <DataGrid.Columns>
                             <DataGridTextColumn Width="*" Header="" Binding="{Binding StockId}" Visibility="Hidden" />
                             <DataGridTextColumn Width="*" Header="Company Name" Binding="{Binding CompanyName}" />
@@ -61,12 +78,12 @@
 
                     </DataGrid>
                     <StackPanel Orientation="Horizontal"
-                        Grid.Column="1"
+                        Grid.Column="2"
                         Grid.Row="0"
-                        Grid.ColumnSpan='3'
+                        Grid.ColumnSpan='5'
                          Height="40"
                          VerticalAlignment="Bottom"
-                         HorizontalAlignment="Stretch"
+                         HorizontalAlignment="Stretch" Margin="0,0,154.88,168.4" Grid.RowSpan="2"
                                 >
                         <Button Content='Next'
                         x:Name='btnNext'
@@ -102,8 +119,73 @@
 
         </TabItem>
 
-        <TabItem Header="Contact Us" Background="Gray">
-            <Grid HorizontalAlignment="Left" Height="312" Margin="10,15,0,0" VerticalAlignment="Top" Width="748"/>
+        <TabItem Header="Cash Account" Background="Gray">
+            <Grid HorizontalAlignment="Left" Height="312" Margin="10,15,0,0" VerticalAlignment="Top" Width="748">
+                <Label Content="Available Cash: " HorizontalAlignment="Left" Margin="463,19,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="lblAmount" Content="" HorizontalAlignment="Left" Margin="654,19,0,0" VerticalAlignment="Top"/>
+                <Button Content="Add Money" HorizontalAlignment="Left" Margin="34,87,0,0" VerticalAlignment="Top" Width="113"/>
+                <Button Content="Withdraw Money" HorizontalAlignment="Left" Margin="213,87,0,0" VerticalAlignment="Top" Width="127"/>
+                <TextBox x:Name="txtAmount" HorizontalAlignment="Left" Height="23" Margin="91,22,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+                <Grid Margin="-10,128,10,-128">
+                    <Grid.ColumnDefinitions>
+
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <DataGrid x:Name='transactionGrid' AutoGenerateColumns="False"
+                      Grid.Column='1'
+                      Grid.Row='1'
+                      Margin='8' >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Width="*" Header="" Binding="{Binding TransactionId}" Visibility="Hidden" />
+                            <DataGridTextColumn Width="*" Header="Type" Binding="{Binding Type}" />
+                            <DataGridTextColumn Width="*" Header="Amount" Binding="{Binding Amount}" />
+                            <DataGridTextColumn Width="*" Header="Staust" Binding="{Binding Status}" />
+                            <DataGridTextColumn Width="*" Header="Date" Binding="{Binding TransDate}" />
+
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <StackPanel Orientation="Horizontal"
+                       
+                        Grid.Row="0"
+                       
+                         Height="40"
+                         VerticalAlignment="Bottom"
+                         HorizontalAlignment="Stretch"
+                                >
+                        <Button Content='Next'
+                        x:Name='btnNextCash'
+                        Margin='6'
+                        Padding="3"        
+                        Click='btnNext_Click' />
+                        <Button Content='Previous'
+                        x:Name='btnPrevCash'
+                        Margin='6'
+                                Padding="3" 
+                        Click='btnPrev_Click' />
+                        <Button Content='First'
+                        x:Name='btnFirstCash'
+                        Margin='6'
+                        Click='btnFirst_Click' />
+                        <Button Content='Last'
+                        x:Name='btnLastCash'
+                        Margin='6'
+                                Padding="3" 
+                        Click='btnLast_Click' />
+                        <StackPanel Orientation='Horizontal'
+                            HorizontalAlignment='Right'>
+                            <Label x:Name='lblPageInfoCash'
+                                   Padding="3" 
+                        Margin='6'           
+                                   />
+                            <ComboBox x:Name='cbnumRecCash'
+                              SelectionChanged='cbNumberOfRecords_SelectionChanged' />
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </Grid>
 
         </TabItem>
 

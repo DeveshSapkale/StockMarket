@@ -23,5 +23,13 @@ namespace DataLayer.Model
             DAY,
             IMMEDIATE
         }
+
+        public enum TransactionStatus
+        {
+            STOCK_BUY,
+            STOCK_SELL,
+            MONEY_DEPOSITED,
+            MONEY_WITHDRAW
+        }
     }
 }

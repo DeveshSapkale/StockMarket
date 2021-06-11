@@ -52,6 +52,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccounTransactionHistoryService.cs" />
+    <Compile Include="AccountService.cs" />
     <Compile Include="ApplicationContext.cs" />
     <Compile Include="Entities\Account.cs" />
     <Compile Include="Entities\AccountTransactionHistory.cs" />
