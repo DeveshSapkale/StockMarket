@@ -63,6 +63,7 @@
     <Compile Include="Entities\Order.cs" />
     <Compile Include="Entities\Stock.cs" />
     <Compile Include="Entities\StockMarketTime.cs" />
+    <Compile Include="Interface\IOrderService.cs" />
     <Compile Include="LiveStockDetailsProvider.cs" />
     <Compile Include="MemberHoldingProvider.cs" />
     <Compile Include="Model\Misc.cs" />

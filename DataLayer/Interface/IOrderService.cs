@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BussinessLogic.Interface
+namespace DataLayer.Interface
 {
     public interface IOrderService
     {

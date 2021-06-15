@@ -96,6 +96,7 @@
       <DependentUpon>Registration.xaml</DependentUpon>
     </Compile>
     <Compile Include="SimplePooling.cs" />
+    <Compile Include="ViewModel\OrderViewModel.cs" />
     <Compile Include="ViewModel\StockViewModel.cs" />
     <Page Include="Admin\AdminDashBoard.xaml">
       <SubType>Designer</SubType>

@@ -1,6 +1,7 @@
 ﻿using BussinessLogic.Interface;
 using DataLayer;
 using DataLayer.Entities;
+using DataLayer.Interface;
 using DataLayer.Model;
 using StockMarket.Interface;
 using System.Collections.Generic;
@@ -37,21 +38,25 @@ namespace BussinessLogic
         {
             order.Status = OrderStatus.PENDING.ToString();
             var ord =  _orderService.PlaceOrder(order);
-            LiveStockDetailsProvider.AddShareBid(new StockTradeBid() { OrderId = ord.OrderId, StockId = ord.StockId, BidQuantity = ord.Quantity, BidUnitPrice = ord.UnitPrice });
-
+            LiveStockDetailsProvider.AddShareBid(new StockTradeBid() { OrderId = ord.OrderId, MemberId = ord.MemberId, StockId = ord.StockId, BidQuantity = ord.Quantity, BidUnitPrice = ord.UnitPrice });
+            LiveStockDetailsProvider.LiveOrders.Add(order);
             if(order.OrderType == OrderValidity.IMMEDIATE.ToString())
             {
-                
+                LiveStockDetailsProvider.CheckIfOrderCanBeResolved(order);
             }
 
             return null;
 
         }
 
-        public Order SellShare(Order order)
+        public Order SellShare(Order ord)
         {
-            return _orderService.PlaceOrder(order);
+            ord.Status = OrderStatus.PENDING.ToString();
+            _orderService.PlaceOrder(ord);
+            LiveStockDetailsProvider.AddShareAsk(new StockTradeAsk() { OrderId = ord.OrderId, MemberId = ord.MemberId, StockId = ord.StockId, AskQuantity = ord.Quantity, AskUnitPrice = ord.UnitPrice });
+            LiveStockDetailsProvider.LiveOrders.Add(ord);
+            return null;
         }
-        
+
     }
 }

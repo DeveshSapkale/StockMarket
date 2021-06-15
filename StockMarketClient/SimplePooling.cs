@@ -12,6 +12,7 @@ namespace StockMarketClient
     public static class SimplePooling
     {
         public static ObservableCollection<StockViewModel> LiveStocks = new ObservableCollection<StockViewModel>();
+        public static ObservableCollection<OrderViewModel> LiveOrders = new ObservableCollection<OrderViewModel>();
         private static readonly LiveStockData.LiveStockDataSvcClient serviceClient = new LiveStockData.LiveStockDataSvcClient();
         private static readonly TimeSpan _fluctuationTimerInterval = TimeSpan.FromSeconds(20);
         private static Timer _timer;

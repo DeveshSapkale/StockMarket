@@ -123,8 +123,8 @@
             <Grid HorizontalAlignment="Left" Height="312" Margin="10,15,0,0" VerticalAlignment="Top" Width="748">
                 <Label Content="Available Cash: " HorizontalAlignment="Left" Margin="463,19,0,0" VerticalAlignment="Top"/>
                 <Label x:Name="lblAmount" Content="" HorizontalAlignment="Left" Margin="654,19,0,0" VerticalAlignment="Top"/>
-                <Button Content="Add Money" HorizontalAlignment="Left" Margin="34,87,0,0" VerticalAlignment="Top" Width="113"/>
-                <Button Content="Withdraw Money" HorizontalAlignment="Left" Margin="213,87,0,0" VerticalAlignment="Top" Width="127"/>
+                <Button x:Name="btnAddMoney" Content="Add Money" HorizontalAlignment="Left" Margin="34,87,0,0" VerticalAlignment="Top" Width="113" Click="btnAddMoney_Click"/>
+                <Button x:Name="btnWithdrawMoney" Content="Withdraw Money" HorizontalAlignment="Left" Margin="213,87,0,0" VerticalAlignment="Top" Width="127" Click="btnWithdrawMoney_Click"/>
                 <TextBox x:Name="txtAmount" HorizontalAlignment="Left" Height="23" Margin="91,22,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
                 <Grid Margin="-10,128,10,-128">
                     <Grid.ColumnDefinitions>
@@ -159,21 +159,21 @@
                         x:Name='btnNextCash'
                         Margin='6'
                         Padding="3"        
-                        Click='btnNext_Click' />
+                        Click='btnNextCash_Click' />
                         <Button Content='Previous'
                         x:Name='btnPrevCash'
-                        Margin='6'
+                        Margin='6,6,6,0'
                                 Padding="3" 
-                        Click='btnPrev_Click' />
+                        Click='btnPrevCash_Click' Height="28" VerticalAlignment="Top" />
                         <Button Content='First'
                         x:Name='btnFirstCash'
                         Margin='6'
-                        Click='btnFirst_Click' />
+                        Click='btnFirstCash_Click' />
                         <Button Content='Last'
                         x:Name='btnLastCash'
                         Margin='6'
                                 Padding="3" 
-                        Click='btnLast_Click' />
+                        Click='btnLastCash_Click' />
                         <StackPanel Orientation='Horizontal'
                             HorizontalAlignment='Right'>
                             <Label x:Name='lblPageInfoCash'
@@ -181,7 +181,7 @@
                         Margin='6'           
                                    />
                             <ComboBox x:Name='cbnumRecCash'
-                              SelectionChanged='cbNumberOfRecords_SelectionChanged' />
+                              SelectionChanged='cbCashNumberOfRecords_SelectionChanged' />
                         </StackPanel>
                     </StackPanel>
                 </Grid>

@@ -1,6 +1,7 @@
 ﻿
 using DataLayer;
 using DataLayer.Entities;
+using DataLayer.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DataLayer
 {
-    public class OrderService
+    public class OrderService : IOrderService
     {
         private static readonly ApplicationContext _db = new ApplicationContext();
 

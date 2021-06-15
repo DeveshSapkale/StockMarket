@@ -15,7 +15,7 @@ namespace StockMarket
         [OperationContract]
         IEnumerable<Stock> GetLiveStockDetails();
 
-        //[OperationContract]
-        //void GetLiveOrderStatus(int OrderId);
+        [OperationContract]
+        IEnumerable<Order> GetLiveOrderDetails();
     }
 }

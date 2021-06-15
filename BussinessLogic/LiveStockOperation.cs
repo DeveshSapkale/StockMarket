@@ -20,5 +20,10 @@ namespace BussinessLogic
         {
             return LiveStockDetailsProvider.LiveStocks;
         }
+
+        public static IEnumerable<Order> GetLiveOrderDetails()
+        {
+            return LiveStockDetailsProvider.LiveOrders;
+        }
     }
 }

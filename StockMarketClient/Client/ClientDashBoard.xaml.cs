@@ -50,7 +50,7 @@ namespace StockMarketClient.Client
             holdingsGrid.ItemsSource = myHoldings.Take(numberOfRecPerPage);
             int count = myHoldings.Take(numberOfRecPerPage).Count();
             lblPageInfo.Content = count + " of " + myHoldings.Count;
-            txtProgress.Text = SimplePooling.LiveStocks.Count > 0 ? SimplePooling.LiveStocks[0].LivePrice.ToString(): "";
+            //txtProgress.Text = SimplePooling.LiveStocks.Count > 0 ? SimplePooling.LiveStocks[0].LivePrice.ToString(): "";
         }
 
         private IEnumerable<MemberHolding> GetHoldings()
@@ -159,6 +159,10 @@ namespace StockMarketClient.Client
             this.Hide();
             buySellStock.Show();
         }
+        private void btnViewStock_ClickEvents(object sender, RoutedEventArgs e)
+        {
+
+        }
 
         private void btnSellStock_ClickEvent(object sender, RoutedEventArgs e)
         {
@@ -204,6 +208,41 @@ namespace StockMarketClient.Client
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             SimplePooling.Stop();
+        }
+
+        private void btnAddMoney_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnWithdrawMoney_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnNextCash_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnPrevCash_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnFirstCash_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnLastCash_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void cbCashNumberOfRecords_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

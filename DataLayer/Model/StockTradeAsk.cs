@@ -10,6 +10,7 @@ namespace DataLayer.Model
     {
         public int OrderId { get; set; }
         public int StockId { get; set; }
+        public int MemberId { get; set; }
         public int AskQuantity { get; set; }
         public decimal AskUnitPrice { get; set; }
     }
