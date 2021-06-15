@@ -85,6 +85,12 @@
   <wsdl:message name="IStockMarket_BuyShare_OutputMessage">
     <wsdl:part name="parameters" element="tns:BuyShareResponse" />
   </wsdl:message>
+  <wsdl:message name="IStockMarket_GetSharesByName_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSharesByName" />
+  </wsdl:message>
+  <wsdl:message name="IStockMarket_GetSharesByName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSharesByNameResponse" />
+  </wsdl:message>
   <wsdl:portType name="IStockMarket">
     <wsdl:operation name="Login">
       <wsdl:input wsaw:Action="http://tempuri.org/IStockMarket/Login" message="tns:IStockMarket_Login_InputMessage" />
@@ -137,6 +143,10 @@
     <wsdl:operation name="BuyShare">
       <wsdl:input wsaw:Action="http://tempuri.org/IStockMarket/BuyShare" message="tns:IStockMarket_BuyShare_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IStockMarket/BuyShareResponse" message="tns:IStockMarket_BuyShare_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSharesByName">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStockMarket/GetSharesByName" message="tns:IStockMarket_GetSharesByName_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStockMarket/GetSharesByNameResponse" message="tns:IStockMarket_GetSharesByName_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IStockMarket" type="tns:IStockMarket">
@@ -251,6 +261,15 @@
     </wsdl:operation>
     <wsdl:operation name="BuyShare">
       <soap:operation soapAction="http://tempuri.org/IStockMarket/BuyShare" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSharesByName">
+      <soap:operation soapAction="http://tempuri.org/IStockMarket/GetSharesByName" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

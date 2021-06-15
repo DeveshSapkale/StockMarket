@@ -161,7 +161,11 @@ namespace StockMarketClient.Client
         }
         private void btnViewStock_ClickEvents(object sender, RoutedEventArgs e)
         {
-
+           var stock =  stockSearchGrid.SelectedItem as Stock;
+           var memberHolding = myHoldings.SingleOrDefault(x => x.StockId == stock.Id);
+            StockDetails stockDetails = new StockDetails(stock, memberHolding);
+            stockDetails.Show();
+            
         }
 
         private void btnSellStock_ClickEvent(object sender, RoutedEventArgs e)
@@ -201,8 +205,14 @@ namespace StockMarketClient.Client
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            StockDeatils s = new StockDeatils();
-            s.Show();
+           
+        }
+
+        private void btnSearchStock_Click(object sender, RoutedEventArgs e)
+        {
+            ServiceReference.StockMarketClient serviceReference = new ServiceReference.StockMarketClient();
+            var shares = serviceReference.GetSharesByName(txtSearchStock.Text.ToString());
+            stockSearchGrid.ItemsSource = shares;
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

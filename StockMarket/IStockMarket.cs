@@ -46,6 +46,8 @@ namespace StockMarket
         Order SellShare(Order order);
         [OperationContract]
         Order BuyShare(Order order);
+        [OperationContract]
+        IEnumerable<Stock> GetSharesByName(string stockName);
         #endregion Memberoperations
 
     }

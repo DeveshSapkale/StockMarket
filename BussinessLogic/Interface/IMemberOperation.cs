@@ -8,5 +8,6 @@ namespace BussinessLogic.Interface
         Member Login(string userName, string password);
         Member Register(Member member);
         IEnumerable<MemberHolding> MemberHoldings(int memberId);
+        IEnumerable<Stock> GetSharesByName(string stockName);
     }
 }

@@ -21,9 +21,10 @@
       <xs:element minOccurs="0" name="CreationDate" type="xs:dateTime" />
       <xs:element minOccurs="0" name="Exchange" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="InitialPrice" type="xs:decimal" />
       <xs:element minOccurs="0" name="LivePrice" type="xs:decimal" />
       <xs:element minOccurs="0" name="Symbol" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Volume" type="xs:long" />
+      <xs:element minOccurs="0" name="Volume" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Stock" nillable="true" type="tns:Stock" />
@@ -68,6 +69,7 @@
   <xs:element name="MemberHolding" nillable="true" type="tns:MemberHolding" />
   <xs:complexType name="Order">
     <xs:sequence>
+      <xs:element minOccurs="0" name="FulfilledQuatity" type="xs:int" />
       <xs:element minOccurs="0" name="MemberId" type="xs:int" />
       <xs:element minOccurs="0" name="OrderId" type="xs:int" />
       <xs:element minOccurs="0" name="OrderType" nillable="true" type="xs:string" />

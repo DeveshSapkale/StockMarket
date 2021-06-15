@@ -180,4 +180,18 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetSharesByName">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="stockName" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSharesByNameResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/DataLayer.Entities" minOccurs="0" name="GetSharesByNameResult" nillable="true" type="q18:ArrayOfStock" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

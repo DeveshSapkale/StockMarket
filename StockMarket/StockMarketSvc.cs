@@ -16,7 +16,7 @@ namespace StockMarket
     public class StockMarketSvc : IStockMarket
     {
         private readonly AdminOperation _adminOperation = new AdminOperation(new StockSevice(), new MarketDateOffService());
-        private readonly MemberOperation _memberOperation = new MemberOperation(new LoginService(), new OrderService());
+        private readonly MemberOperation _memberOperation = new MemberOperation(new LoginService(), new OrderService(), new StockSevice());
         private readonly StockMarketAvailablityProvider _stockMarketAvailablityProvider = new StockMarketAvailablityProvider();
         #region Admin Operations
         public Stock CreateStock(Stock stock)
@@ -94,8 +94,13 @@ namespace StockMarket
             return _adminOperation.GetStockMarketOffDates();
         }
 
+        public IEnumerable<Stock> GetSharesByName(string stockName)
+        {
+            return _memberOperation.GetSharesByName(stockName);
+        }
+
         #endregion Member Operations
 
-       
+
     }
 }

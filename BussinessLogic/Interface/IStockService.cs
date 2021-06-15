@@ -14,5 +14,6 @@ namespace BussinessLogic.Interface
         List<Stock> GetStocks();
         Stock GetStock(int id);
         bool DeleteStock(int stockId);
+        List<Stock> GetStocksByName(string stockName);
     }
 }

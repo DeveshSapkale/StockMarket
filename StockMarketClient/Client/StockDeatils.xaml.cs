@@ -1,4 +1,5 @@
-﻿using StockMarketClient.ViewModel;
+﻿using DataLayer.Entities;
+using StockMarketClient.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,14 +19,26 @@ namespace StockMarketClient.Client
     /// <summary>
     /// Interaction logic for StockDeatils.xaml
     /// </summary>
-    public partial class StockDeatils : Window
+    public partial class StockDetails : Window
     {
         StockViewModel stockViewModel = new StockViewModel();
-        public StockDeatils()
+        private readonly MemberHolding _memberHolding;
+        public StockDetails(Stock stock, MemberHolding memberHolding = null)
         {
             InitializeComponent();
-            stockViewModel = SimplePooling.LiveStocks[0];
+            stockViewModel = SimplePooling.LiveStocks.SingleOrDefault(x => x.Id == stock.Id);
             DataContext = stockViewModel;
+            _memberHolding = memberHolding;
+        }
+
+        private void btnBuyShare_Click(object sender, RoutedEventArgs e)
+        {
+            BuySellStock buySellStock = new BuySellStock(this, _memberHolding, false);
+        }
+
+        private void btnSellShare_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

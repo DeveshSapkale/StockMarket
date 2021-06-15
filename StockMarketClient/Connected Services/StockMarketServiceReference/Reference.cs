@@ -92,6 +92,12 @@ namespace StockMarketClient.StockMarketServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStockMarket/BuyShare", ReplyAction="http://tempuri.org/IStockMarket/BuyShareResponse")]
         System.Threading.Tasks.Task<DataLayer.Entities.Order> BuyShareAsync(DataLayer.Entities.Order order);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStockMarket/GetSharesByName", ReplyAction="http://tempuri.org/IStockMarket/GetSharesByNameResponse")]
+        DataLayer.Entities.Stock[] GetSharesByName(string stockName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStockMarket/GetSharesByName", ReplyAction="http://tempuri.org/IStockMarket/GetSharesByNameResponse")]
+        System.Threading.Tasks.Task<DataLayer.Entities.Stock[]> GetSharesByNameAsync(string stockName);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -223,6 +229,14 @@ namespace StockMarketClient.StockMarketServiceReference {
         
         public System.Threading.Tasks.Task<DataLayer.Entities.Order> BuyShareAsync(DataLayer.Entities.Order order) {
             return base.Channel.BuyShareAsync(order);
+        }
+        
+        public DataLayer.Entities.Stock[] GetSharesByName(string stockName) {
+            return base.Channel.GetSharesByName(stockName);
+        }
+        
+        public System.Threading.Tasks.Task<DataLayer.Entities.Stock[]> GetSharesByNameAsync(string stockName) {
+            return base.Channel.GetSharesByNameAsync(stockName);
         }
     }
 }

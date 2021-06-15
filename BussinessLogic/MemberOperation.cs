@@ -13,10 +13,13 @@ namespace BussinessLogic
     {
         private readonly ILoginService _loginService;
         private readonly IOrderService _orderService;
-        public MemberOperation(ILoginService loginService, IOrderService orderService)
+        private readonly IStockService _stockService;
+
+        public MemberOperation(ILoginService loginService, IOrderService orderService, IStockService stockService)
         {
             _loginService = loginService;
             _orderService = orderService;
+            _stockService = stockService;
         }
 
         public Member Login(string userName, string password)
@@ -58,5 +61,9 @@ namespace BussinessLogic
             return null;
         }
 
+        public IEnumerable<Stock> GetSharesByName(string stockName)
+        {
+            return _stockService.GetStocksByName(stockName);
+        }
     }
 }

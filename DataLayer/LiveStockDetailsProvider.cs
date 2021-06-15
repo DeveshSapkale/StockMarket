@@ -34,10 +34,10 @@ namespace DataLayer
                 LiveStocks.Add(stock);
             }
 
-            foreach (var order in _db.Orders)
-            {
-                LiveOrders.Add(order);
-            }
+            //foreach (var order in _db.Orders.Where(x => x.PurchaseTime.Date == DateTime.Now.Date))
+            //{
+            //    LiveOrders.Add(order);
+            //}
 
             if(!RamdomPriceFluctuator.IsRunning)
                 RamdomPriceFluctuator.Start();

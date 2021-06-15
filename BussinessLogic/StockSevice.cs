@@ -39,6 +39,11 @@ namespace BussinessLogic
             }
         }
 
+        public List<Stock> GetStocksByName(string stockName)
+        {
+            return _db.Stocks.Where(x => x.CompanyName.Contains(stockName)).ToList();
+        }
+
         public Stock CreateStock(Stock stock)
         {
             if (stock == null)
