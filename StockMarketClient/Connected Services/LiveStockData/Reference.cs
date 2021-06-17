@@ -16,10 +16,16 @@ namespace StockMarketClient.LiveStockData {
     public interface ILiveStockDataSvc {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILiveStockDataSvc/GetLiveStockDetails", ReplyAction="http://tempuri.org/ILiveStockDataSvc/GetLiveStockDetailsResponse")]
-        DataLayer.Entities.Stock[] GetLiveStockDetails();
+        DataLayer.Model.LiveStockDetails[] GetLiveStockDetails();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILiveStockDataSvc/GetLiveStockDetails", ReplyAction="http://tempuri.org/ILiveStockDataSvc/GetLiveStockDetailsResponse")]
-        System.Threading.Tasks.Task<DataLayer.Entities.Stock[]> GetLiveStockDetailsAsync();
+        System.Threading.Tasks.Task<DataLayer.Model.LiveStockDetails[]> GetLiveStockDetailsAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILiveStockDataSvc/GetLiveOrderDetails", ReplyAction="http://tempuri.org/ILiveStockDataSvc/GetLiveOrderDetailsResponse")]
+        DataLayer.Entities.Order[] GetLiveOrderDetails();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILiveStockDataSvc/GetLiveOrderDetails", ReplyAction="http://tempuri.org/ILiveStockDataSvc/GetLiveOrderDetailsResponse")]
+        System.Threading.Tasks.Task<DataLayer.Entities.Order[]> GetLiveOrderDetailsAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -49,12 +55,20 @@ namespace StockMarketClient.LiveStockData {
                 base(binding, remoteAddress) {
         }
         
-        public DataLayer.Entities.Stock[] GetLiveStockDetails() {
+        public DataLayer.Model.LiveStockDetails[] GetLiveStockDetails() {
             return base.Channel.GetLiveStockDetails();
         }
         
-        public System.Threading.Tasks.Task<DataLayer.Entities.Stock[]> GetLiveStockDetailsAsync() {
+        public System.Threading.Tasks.Task<DataLayer.Model.LiveStockDetails[]> GetLiveStockDetailsAsync() {
             return base.Channel.GetLiveStockDetailsAsync();
+        }
+        
+        public DataLayer.Entities.Order[] GetLiveOrderDetails() {
+            return base.Channel.GetLiveOrderDetails();
+        }
+        
+        public System.Threading.Tasks.Task<DataLayer.Entities.Order[]> GetLiveOrderDetailsAsync() {
+            return base.Channel.GetLiveOrderDetailsAsync();
         }
     }
 }

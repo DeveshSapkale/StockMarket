@@ -66,6 +66,7 @@
     <Compile Include="Interface\IOrderService.cs" />
     <Compile Include="LiveStockDetailsProvider.cs" />
     <Compile Include="MemberHoldingProvider.cs" />
+    <Compile Include="Model\LiveStockDetails.cs" />
     <Compile Include="Model\Misc.cs" />
     <Compile Include="Model\StockTradeAsk.cs" />
     <Compile Include="Model\StockTradeBid.cs" />

@@ -1,4 +1,5 @@
 ﻿using DataLayer.Entities;
+using DataLayer.Model;
 using StockMarketClient.Misc;
 using StockMarketClient.ViewModel;
 using System;
@@ -49,15 +50,19 @@ namespace StockMarketClient
                 }
         }
 
-        private static void UpdateLocalEntries(IEnumerable<Stock> stocks)
+        private static void UpdateLocalEntries(IEnumerable<LiveStockDetails> stocks)
         {
             foreach (var stock in stocks)
             {
-                var item = LiveStocks.SingleOrDefault(x => x.Id == stock.Id);
-                if (item == null)
+                var liveStock = LiveStocks.SingleOrDefault(x => x.Id == stock.Id);
+                if (liveStock == null)
                     AddMissingStock(stock);
                 else
-                    item.LivePrice = stock.LivePrice;
+                {
+                   liveStock.LivePrice  = stock.LivePrice;
+                    liveStock.TodaysHigh = stock.TodaysHigh;
+                   liveStock.TodaysLow  = stock.TodaysLow;
+                }
             }
         }
 

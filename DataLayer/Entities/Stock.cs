@@ -26,14 +26,14 @@ namespace DataLayer.Entities
         
         [DataMember] 
         public int Volume { get; set; }
+
         [DataMember]
         public decimal InitialPrice { get; set; }
         
         [DataMember]
         public DateTime CreationDate { get; set; }
 
-        [DataMember]
-        public decimal LivePrice { get; set; } = 0;
+       
 
     }
 }

@@ -1,4 +1,5 @@
 ﻿using DataLayer.Entities;
+using DataLayer.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace StockMarket
     public interface ILiveStockDataSvc
     {
         [OperationContract]
-        IEnumerable<Stock> GetLiveStockDetails();
+        IEnumerable<LiveStockDetails> GetLiveStockDetails();
 
         [OperationContract]
         IEnumerable<Order> GetLiveOrderDetails();

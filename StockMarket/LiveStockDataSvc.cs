@@ -1,5 +1,6 @@
 ﻿using BussinessLogic;
 using DataLayer.Entities;
+using DataLayer.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,7 @@ namespace StockMarket
             return LiveStockOperation.GetLiveOrderDetails();
         }
 
-        IEnumerable<Stock> ILiveStockDataSvc.GetLiveStockDetails()
+        IEnumerable<LiveStockDetails> ILiveStockDataSvc.GetLiveStockDetails()
         {
             return LiveStockOperation.GetLiveStockDetails();
         }

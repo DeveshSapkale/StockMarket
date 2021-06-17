@@ -158,6 +158,9 @@
     <None Include="Connected Services\LiveStockData\item2.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\LiveStockData\item3.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\LiveStockData\LiveStockDataSvc.wsdl" />
     <None Include="Connected Services\StockMarketServiceReference\DataLayer.Entities1.xsd">
       <SubType>Designer</SubType>
@@ -175,6 +178,7 @@
     <None Include="Properties\DataSources\DataLayer.Entities.Order.datasource" />
     <None Include="Properties\DataSources\DataLayer.Entities.Stock.datasource" />
     <None Include="Properties\DataSources\DataLayer.Entities.StockMarketOffDates.datasource" />
+    <None Include="Properties\DataSources\DataLayer.Model.LiveStockDetails.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

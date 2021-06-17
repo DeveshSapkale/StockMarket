@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +14,7 @@ namespace DataLayer
 {
    public static class LiveStockDetailsProvider
     {
-        public static List<Stock> LiveStocks { get; set; }
+        public static List<LiveStockDetails> LiveStocks { get; set; }
         private static readonly ApplicationContext _db = new ApplicationContext();
         public static Dictionary<int , SortedSet<StockTradeAsk>> AskedOrder = new Dictionary<int, SortedSet<StockTradeAsk>>();
         public static Dictionary<int , SortedSet<StockTradeBid>> BidedOrder = new Dictionary<int, SortedSet<StockTradeBid>>();
@@ -28,18 +29,27 @@ namespace DataLayer
 
         private static void Init()
         {
-            LiveStocks = new List<Stock>();
+            LiveStocks = new List<LiveStockDetails>();
             foreach (var stock in _db.Stocks)
             {
-                LiveStocks.Add(stock);
+                LiveStocks.Add(new LiveStockDetails { 
+                CompanyName = stock.CompanyName,
+                Exchange = stock.Exchange,
+                Id = stock.Id,
+                InitialPrice = stock.InitialPrice,
+                Symbol = stock.Symbol,
+                Volume = stock.Volume,
+                CreationDate = stock.CreationDate
+                });
             }
 
-            //foreach (var order in _db.Orders.Where(x => x.PurchaseTime.Date == DateTime.Now.Date))
-            //{
-            //    LiveOrders.Add(order);
-            //}
+            var todaysDate = DateTime.Now.Date;
+            foreach (var order in _db.Orders.Where(x => DbFunctions.TruncateTime(x.PurchaseTime) == DbFunctions.TruncateTime(DateTime.Today)))
+            {
+                LiveOrders.Add(order);
+            }
 
-            if(!RamdomPriceFluctuator.IsRunning)
+            if (!RamdomPriceFluctuator.IsRunning)
                 RamdomPriceFluctuator.Start();
         }
 
@@ -50,7 +60,7 @@ namespace DataLayer
 
         public static void FluctuateStockPrice(int priceDifference)
         {
-            if (TimeSpan.Compare(DateTime.Now.TimeOfDay, StockMarketAvailablityProvider.StockMarketStopTime) == 0 || TimeSpan.Compare(DateTime.Now.TimeOfDay, StockMarketAvailablityProvider.StockMarketStopTime) == 1)
+            if (false)//TimeSpan.Compare(DateTime.Now.TimeOfDay, StockMarketAvailablityProvider.StockMarketStopTime) == 0 || TimeSpan.Compare(DateTime.Now.TimeOfDay, StockMarketAvailablityProvider.StockMarketStopTime) == 1)
             {
                 if (RamdomPriceFluctuator.IsRunning)
                     RamdomPriceFluctuator.Stop();

@@ -36,5 +36,31 @@ namespace StockMarketClient.ViewModel
                 OnPropertyChanged("LivePrice");
             }
         }
+
+        public decimal _todaysLow;
+        public decimal TodaysLow
+        { 
+            get {
+                return _todaysLow;
+            }
+            set
+            {
+                _todaysLow = value;
+                OnPropertyChanged("TodaysLow");
+            }
+        }
+        public decimal _todaysHigh;
+        public decimal TodaysHigh
+        {
+            get
+            {
+                return _todaysHigh;
+            }
+            set
+            {
+                _todaysLow = value;
+                OnPropertyChanged("TodaysHigh");
+            }
+        }
     }
 }

@@ -38,7 +38,7 @@ namespace StockMarketClient.Client
 
         private void btnSellShare_Click(object sender, RoutedEventArgs e)
         {
-
+            BuySellStock buySellStock = new BuySellStock(this, _memberHolding, false);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using DataLayer.Entities;
+using DataLayer.Model;
 using StockMarketClient.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -65,11 +66,16 @@ namespace StockMarketClient
             }
         }
 
-        private static void UpdateLocalEntries(IEnumerable<Stock> stocks)
+        private static void UpdateLocalEntries(IEnumerable<LiveStockDetails> stocks)
         {
             foreach( var stock in LiveStocks)
             {
-                stock.LivePrice = stocks.First(x => x.Id == stock.Id).LivePrice;
+                var liveStock = stocks.First(x => x.Id == stock.Id);
+                stock.LivePrice = liveStock.LivePrice;
+                stock.TodaysHigh = liveStock.TodaysHigh;
+                stock.TodaysLow = liveStock.TodaysLow;
+
+                
             }
         }
     }

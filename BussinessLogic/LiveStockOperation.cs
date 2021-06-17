@@ -1,5 +1,6 @@
 ﻿using DataLayer;
 using DataLayer.Entities;
+using DataLayer.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,7 @@ namespace BussinessLogic
                 RamdomPriceFluctuator.Start();
         }
 
-        public static IEnumerable<Stock> GetLiveStockDetails()
+        public static IEnumerable<LiveStockDetails> GetLiveStockDetails()
         {
             return LiveStockDetailsProvider.LiveStocks;
         }

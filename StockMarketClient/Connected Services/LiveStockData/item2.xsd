@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/DataLayer.Entities" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/DataLayer.Entities" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:complexType name="ArrayOfStock">
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/DataLayer.Model" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/DataLayer.Model" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:8735/LiveStockDataSvc/?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/DataLayer.Entities" />
+  <xs:complexType name="ArrayOfLiveStockDetails">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="Stock" nillable="true" type="tns:Stock" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="LiveStockDetails" nillable="true" type="tns:LiveStockDetails" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ArrayOfStock" nillable="true" type="tns:ArrayOfStock" />
-  <xs:complexType name="Stock">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="CompanyName" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="CreationDate" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="Exchange" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Id" type="xs:int" />
-      <xs:element minOccurs="0" name="LivePrice" type="xs:decimal" />
-      <xs:element minOccurs="0" name="Symbol" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Volume" type="xs:long" />
-    </xs:sequence>
+  <xs:element name="ArrayOfLiveStockDetails" nillable="true" type="tns:ArrayOfLiveStockDetails" />
+  <xs:complexType name="LiveStockDetails">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q1="http://schemas.datacontract.org/2004/07/DataLayer.Entities" base="q1:Stock">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="LivePrice" type="xs:decimal" />
+          <xs:element minOccurs="0" name="TodaysHigh" type="xs:decimal" />
+          <xs:element minOccurs="0" name="TodaysLow" type="xs:decimal" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
-  <xs:element name="Stock" nillable="true" type="tns:Stock" />
+  <xs:element name="LiveStockDetails" nillable="true" type="tns:LiveStockDetails" />
 </xs:schema>
