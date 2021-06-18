@@ -91,6 +91,42 @@
   <wsdl:message name="IStockMarket_GetSharesByName_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetSharesByNameResponse" />
   </wsdl:message>
+  <wsdl:message name="IStockMarket_AddMoney_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddMoney" />
+  </wsdl:message>
+  <wsdl:message name="IStockMarket_AddMoney_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddMoneyResponse" />
+  </wsdl:message>
+  <wsdl:message name="IStockMarket_WithdrawMoney_InputMessage">
+    <wsdl:part name="parameters" element="tns:WithdrawMoney" />
+  </wsdl:message>
+  <wsdl:message name="IStockMarket_WithdrawMoney_OutputMessage">
+    <wsdl:part name="parameters" element="tns:WithdrawMoneyResponse" />
+  </wsdl:message>
+  <wsdl:message name="IStockMarket_GetTransaction_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTransaction" />
+  </wsdl:message>
+  <wsdl:message name="IStockMarket_GetTransaction_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTransactionResponse" />
+  </wsdl:message>
+  <wsdl:message name="IStockMarket_GetOrders_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrders" />
+  </wsdl:message>
+  <wsdl:message name="IStockMarket_GetOrders_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrdersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IStockMarket_GetOrder_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrder" />
+  </wsdl:message>
+  <wsdl:message name="IStockMarket_GetOrder_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrderResponse" />
+  </wsdl:message>
+  <wsdl:message name="IStockMarket_GetAccount_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAccount" />
+  </wsdl:message>
+  <wsdl:message name="IStockMarket_GetAccount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAccountResponse" />
+  </wsdl:message>
   <wsdl:portType name="IStockMarket">
     <wsdl:operation name="Login">
       <wsdl:input wsaw:Action="http://tempuri.org/IStockMarket/Login" message="tns:IStockMarket_Login_InputMessage" />
@@ -147,6 +183,30 @@
     <wsdl:operation name="GetSharesByName">
       <wsdl:input wsaw:Action="http://tempuri.org/IStockMarket/GetSharesByName" message="tns:IStockMarket_GetSharesByName_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IStockMarket/GetSharesByNameResponse" message="tns:IStockMarket_GetSharesByName_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddMoney">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStockMarket/AddMoney" message="tns:IStockMarket_AddMoney_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStockMarket/AddMoneyResponse" message="tns:IStockMarket_AddMoney_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="WithdrawMoney">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStockMarket/WithdrawMoney" message="tns:IStockMarket_WithdrawMoney_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStockMarket/WithdrawMoneyResponse" message="tns:IStockMarket_WithdrawMoney_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTransaction">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStockMarket/GetTransaction" message="tns:IStockMarket_GetTransaction_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStockMarket/GetTransactionResponse" message="tns:IStockMarket_GetTransaction_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrders">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStockMarket/GetOrders" message="tns:IStockMarket_GetOrders_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStockMarket/GetOrdersResponse" message="tns:IStockMarket_GetOrders_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrder">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStockMarket/GetOrder" message="tns:IStockMarket_GetOrder_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStockMarket/GetOrderResponse" message="tns:IStockMarket_GetOrder_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAccount">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStockMarket/GetAccount" message="tns:IStockMarket_GetAccount_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStockMarket/GetAccountResponse" message="tns:IStockMarket_GetAccount_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IStockMarket" type="tns:IStockMarket">
@@ -270,6 +330,60 @@
     </wsdl:operation>
     <wsdl:operation name="GetSharesByName">
       <soap:operation soapAction="http://tempuri.org/IStockMarket/GetSharesByName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddMoney">
+      <soap:operation soapAction="http://tempuri.org/IStockMarket/AddMoney" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WithdrawMoney">
+      <soap:operation soapAction="http://tempuri.org/IStockMarket/WithdrawMoney" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTransaction">
+      <soap:operation soapAction="http://tempuri.org/IStockMarket/GetTransaction" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrders">
+      <soap:operation soapAction="http://tempuri.org/IStockMarket/GetOrders" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrder">
+      <soap:operation soapAction="http://tempuri.org/IStockMarket/GetOrder" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccount">
+      <soap:operation soapAction="http://tempuri.org/IStockMarket/GetAccount" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

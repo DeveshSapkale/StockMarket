@@ -27,6 +27,7 @@
                         </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
+                <Label x:Name="lblMemberId" Visibility="Hidden" Content="" HorizontalAlignment="Left" Margin="0,2,0,0" VerticalAlignment="Top"/>
             </Grid>
 
         </TabItem>
@@ -123,8 +124,8 @@
         </TabItem>
         <TabItem Header="Cash Account" Background="Gray">
             <Grid HorizontalAlignment="Left" Height="312" Margin="10,15,0,0" VerticalAlignment="Top" Width="748">
-                <Label Content="Available Cash: " HorizontalAlignment="Left" Margin="463,19,0,0" VerticalAlignment="Top"/>
-                <Label x:Name="lblAmount" Content="" HorizontalAlignment="Left" Margin="654,19,0,0" VerticalAlignment="Top"/>
+                <Label Content="Available Cash: " HorizontalAlignment="Left" Margin="465,57,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="lblAmount" Content="0" HorizontalAlignment="Left" Margin="563,57,0,0" VerticalAlignment="Top" Width="166"/>
                 <Button x:Name="btnAddMoney" Content="Add Money" HorizontalAlignment="Left" Margin="34,87,0,0" VerticalAlignment="Top" Width="113" Click="btnAddMoney_Click"/>
                 <Button x:Name="btnWithdrawMoney" Content="Withdraw Money" HorizontalAlignment="Left" Margin="213,87,0,0" VerticalAlignment="Top" Width="127" Click="btnWithdrawMoney_Click"/>
                 <TextBox x:Name="txtAmount" HorizontalAlignment="Left" Height="23" Margin="91,22,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
@@ -141,11 +142,10 @@
                       Grid.Row='1'
                       Margin='8' >
                         <DataGrid.Columns>
-                            <DataGridTextColumn Width="*" Header="" Binding="{Binding TransactionId}" Visibility="Hidden" />
-                            <DataGridTextColumn Width="*" Header="Type" Binding="{Binding Type}" />
+                            <DataGridTextColumn Width="*" Header="" Binding="{Binding AccountTransactionHistoryId}" Visibility="Hidden" />
+                            <DataGridTextColumn Width="*" Header="Type" Binding="{Binding Status}" />
                             <DataGridTextColumn Width="*" Header="Amount" Binding="{Binding Amount}" />
-                            <DataGridTextColumn Width="*" Header="Staust" Binding="{Binding Status}" />
-                            <DataGridTextColumn Width="*" Header="Date" Binding="{Binding TransDate}" />
+                            <DataGridTextColumn Width="*" Header="Date" Binding="{Binding CreationDate}" />
 
                         </DataGrid.Columns>
                     </DataGrid>
@@ -187,6 +187,8 @@
                         </StackPanel>
                     </StackPanel>
                 </Grid>
+                <Label Content="INR" HorizontalAlignment="Left" Margin="563,27,0,0" VerticalAlignment="Top" Height="23"/>
+                <Label x:Name="lblAccountId" Visibility="Hidden" Content="" HorizontalAlignment="Left" Margin="369,10,0,0" VerticalAlignment="Top"/>
             </Grid>
 
         </TabItem>

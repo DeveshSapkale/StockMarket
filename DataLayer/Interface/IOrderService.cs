@@ -11,5 +11,7 @@ namespace DataLayer.Interface
     {
         Order PlaceOrder(Order order);
         Order UpdateOrderStatus(int orderId, string status);
+        IEnumerable<Order> GetOrders(int memberId);
+        Order GetOrder(int orderId);
     }
 }

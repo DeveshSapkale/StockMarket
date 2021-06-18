@@ -24,6 +24,12 @@ namespace DataLayer.Model
             IMMEDIATE
         }
 
+        public enum OrderType
+        {
+            BUY,
+            SELL
+        }
+
         public enum TransactionStatus
         {
             STOCK_BUY,

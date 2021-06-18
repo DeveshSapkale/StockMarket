@@ -1,4 +1,5 @@
 ﻿using DataLayer.Entities;
+using DataLayer.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using static DataLayer.Model.Misc;
 
 namespace DataLayer
 {
-   public class AccountService
+   public class AccountService: IAccountService
     {
         private readonly ApplicationContext _db = new ApplicationContext();
         private readonly AccounTransactionHistoryService _accounTransactionHistoryService = new AccounTransactionHistoryService(); 
@@ -34,10 +35,11 @@ namespace DataLayer
             return true;
         }
 
-        public bool AddMoney(int memberId, decimal amount, TransactionStatus transactionStatus)
+        public Account AddMoney(int memberId, decimal amount, TransactionStatus transactionStatus)
         {
             var acc = _db.Accounts.SingleOrDefault(x => x.MemberId == memberId);
             acc.Amount += amount;
+            _db.SaveChanges();
             _accounTransactionHistoryService.AddTransactionHistory(new AccountTransactionHistory
             {
                 AccountId = acc.AccountId,
@@ -46,15 +48,14 @@ namespace DataLayer
                 CreationDate = DateTime.Now,
                 ModifiedDate = DateTime.Now
             }) ;
-            _db.SaveChanges();
-
-            return true;
+            return acc;
         }
 
-        public bool DeductMoney( int memberId, decimal amount, TransactionStatus transactionStatus)
+        public Account DeductMoney( int memberId, decimal amount, TransactionStatus transactionStatus)
         {
             var acc = _db.Accounts.SingleOrDefault(x => x.MemberId == memberId);
             acc.Amount -= amount;
+            _db.SaveChanges();
             _accounTransactionHistoryService.AddTransactionHistory(new AccountTransactionHistory
             {
                 AccountId = acc.AccountId,
@@ -63,8 +64,7 @@ namespace DataLayer
                 CreationDate = DateTime.Now,
                 ModifiedDate = DateTime.Now
             });
-            _db.SaveChanges();
-            return true;
+            return acc;
         }
 
     }

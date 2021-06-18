@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,7 +23,7 @@ namespace DataLayer
             DayOfWeek day = DateTime.Now.DayOfWeek;
             if ((day == DayOfWeek.Saturday) || (day == DayOfWeek.Sunday))
                 return false;
-            if (_db.StockMarketOffDates.Any(x => x.OffDate.Date == DateTime.Now.Date))
+            if (_db.StockMarketOffDates.Any(x => DbFunctions.TruncateTime(x.OffDate) == DbFunctions.TruncateTime(DateTime.Today)))
                 return false;
             if (!IsvalidTime())
                 return false;

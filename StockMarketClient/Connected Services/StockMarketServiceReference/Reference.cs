@@ -98,6 +98,42 @@ namespace StockMarketClient.StockMarketServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStockMarket/GetSharesByName", ReplyAction="http://tempuri.org/IStockMarket/GetSharesByNameResponse")]
         System.Threading.Tasks.Task<DataLayer.Entities.Stock[]> GetSharesByNameAsync(string stockName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStockMarket/AddMoney", ReplyAction="http://tempuri.org/IStockMarket/AddMoneyResponse")]
+        DataLayer.Entities.Account AddMoney(int memberId, decimal amount);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStockMarket/AddMoney", ReplyAction="http://tempuri.org/IStockMarket/AddMoneyResponse")]
+        System.Threading.Tasks.Task<DataLayer.Entities.Account> AddMoneyAsync(int memberId, decimal amount);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStockMarket/WithdrawMoney", ReplyAction="http://tempuri.org/IStockMarket/WithdrawMoneyResponse")]
+        DataLayer.Entities.Account WithdrawMoney(int memberId, decimal amount);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStockMarket/WithdrawMoney", ReplyAction="http://tempuri.org/IStockMarket/WithdrawMoneyResponse")]
+        System.Threading.Tasks.Task<DataLayer.Entities.Account> WithdrawMoneyAsync(int memberId, decimal amount);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStockMarket/GetTransaction", ReplyAction="http://tempuri.org/IStockMarket/GetTransactionResponse")]
+        DataLayer.Entities.AccountTransactionHistory[] GetTransaction(int accountId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStockMarket/GetTransaction", ReplyAction="http://tempuri.org/IStockMarket/GetTransactionResponse")]
+        System.Threading.Tasks.Task<DataLayer.Entities.AccountTransactionHistory[]> GetTransactionAsync(int accountId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStockMarket/GetOrders", ReplyAction="http://tempuri.org/IStockMarket/GetOrdersResponse")]
+        DataLayer.Entities.Order[] GetOrders(int memberId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStockMarket/GetOrders", ReplyAction="http://tempuri.org/IStockMarket/GetOrdersResponse")]
+        System.Threading.Tasks.Task<DataLayer.Entities.Order[]> GetOrdersAsync(int memberId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStockMarket/GetOrder", ReplyAction="http://tempuri.org/IStockMarket/GetOrderResponse")]
+        DataLayer.Entities.Order GetOrder(int orderId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStockMarket/GetOrder", ReplyAction="http://tempuri.org/IStockMarket/GetOrderResponse")]
+        System.Threading.Tasks.Task<DataLayer.Entities.Order> GetOrderAsync(int orderId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStockMarket/GetAccount", ReplyAction="http://tempuri.org/IStockMarket/GetAccountResponse")]
+        DataLayer.Entities.Account GetAccount(int memberId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStockMarket/GetAccount", ReplyAction="http://tempuri.org/IStockMarket/GetAccountResponse")]
+        System.Threading.Tasks.Task<DataLayer.Entities.Account> GetAccountAsync(int memberId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -237,6 +273,54 @@ namespace StockMarketClient.StockMarketServiceReference {
         
         public System.Threading.Tasks.Task<DataLayer.Entities.Stock[]> GetSharesByNameAsync(string stockName) {
             return base.Channel.GetSharesByNameAsync(stockName);
+        }
+        
+        public DataLayer.Entities.Account AddMoney(int memberId, decimal amount) {
+            return base.Channel.AddMoney(memberId, amount);
+        }
+        
+        public System.Threading.Tasks.Task<DataLayer.Entities.Account> AddMoneyAsync(int memberId, decimal amount) {
+            return base.Channel.AddMoneyAsync(memberId, amount);
+        }
+        
+        public DataLayer.Entities.Account WithdrawMoney(int memberId, decimal amount) {
+            return base.Channel.WithdrawMoney(memberId, amount);
+        }
+        
+        public System.Threading.Tasks.Task<DataLayer.Entities.Account> WithdrawMoneyAsync(int memberId, decimal amount) {
+            return base.Channel.WithdrawMoneyAsync(memberId, amount);
+        }
+        
+        public DataLayer.Entities.AccountTransactionHistory[] GetTransaction(int accountId) {
+            return base.Channel.GetTransaction(accountId);
+        }
+        
+        public System.Threading.Tasks.Task<DataLayer.Entities.AccountTransactionHistory[]> GetTransactionAsync(int accountId) {
+            return base.Channel.GetTransactionAsync(accountId);
+        }
+        
+        public DataLayer.Entities.Order[] GetOrders(int memberId) {
+            return base.Channel.GetOrders(memberId);
+        }
+        
+        public System.Threading.Tasks.Task<DataLayer.Entities.Order[]> GetOrdersAsync(int memberId) {
+            return base.Channel.GetOrdersAsync(memberId);
+        }
+        
+        public DataLayer.Entities.Order GetOrder(int orderId) {
+            return base.Channel.GetOrder(orderId);
+        }
+        
+        public System.Threading.Tasks.Task<DataLayer.Entities.Order> GetOrderAsync(int orderId) {
+            return base.Channel.GetOrderAsync(orderId);
+        }
+        
+        public DataLayer.Entities.Account GetAccount(int memberId) {
+            return base.Channel.GetAccount(memberId);
+        }
+        
+        public System.Threading.Tasks.Task<DataLayer.Entities.Account> GetAccountAsync(int memberId) {
+            return base.Channel.GetAccountAsync(memberId);
         }
     }
 }

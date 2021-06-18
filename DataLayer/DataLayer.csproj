@@ -63,7 +63,9 @@
     <Compile Include="Entities\Order.cs" />
     <Compile Include="Entities\Stock.cs" />
     <Compile Include="Entities\StockMarketTime.cs" />
+    <Compile Include="Interface\IAccountService.cs" />
     <Compile Include="Interface\IOrderService.cs" />
+    <Compile Include="Interface\IAccountTransactionHistoryService.cs" />
     <Compile Include="LiveStockDetailsProvider.cs" />
     <Compile Include="MemberHoldingProvider.cs" />
     <Compile Include="Model\LiveStockDetails.cs" />

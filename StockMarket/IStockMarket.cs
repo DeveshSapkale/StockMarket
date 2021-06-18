@@ -48,6 +48,18 @@ namespace StockMarket
         Order BuyShare(Order order);
         [OperationContract]
         IEnumerable<Stock> GetSharesByName(string stockName);
+        [OperationContract]
+        Account AddMoney(int memberId, decimal amount);
+        [OperationContract]
+        Account WithdrawMoney(int memberId, decimal amount);
+        [OperationContract]
+        IEnumerable<AccountTransactionHistory> GetTransaction(int accountId);
+        [OperationContract]
+        IEnumerable<Order> GetOrders(int memberId);
+        [OperationContract]
+        Order GetOrder(int orderId);
+        [OperationContract]
+        Account GetAccount(int memberId);
         #endregion Memberoperations
 
     }

@@ -16,9 +16,10 @@
         <CheckBox x:Name="cbxIsSame" Content="Is Username same as Email Id?" HorizontalAlignment="Left" Margin="81,250,0,0" VerticalAlignment="Top" Checked="CheckBox_Checked"/>
         <Label Content="Username:" HorizontalAlignment="Left" Margin="354,160,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="txtUsername" HorizontalAlignment="Left" Height="23" Margin="354,196,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="229"/>
-        <Button Content="Register" HorizontalAlignment="Left" Margin="260,378,0,0" VerticalAlignment="Top" Width="138" Click="Button_Click"/>
+        <Button Content="Register" HorizontalAlignment="Left" Margin="149,388,0,0" VerticalAlignment="Top" Width="138" Click="Button_Click"/>
         <Label Content="Password:" HorizontalAlignment="Left" Margin="81,290,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="txtPassword" HorizontalAlignment="Left" Height="23" Margin="81,320,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <Button Content="Back To Login" HorizontalAlignment="Left" Margin="354,388,0,0" VerticalAlignment="Top" Width="95" Click="Button_Click_1"/>
 
     </Grid>
 </Window>

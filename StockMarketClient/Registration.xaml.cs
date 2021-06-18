@@ -13,9 +13,11 @@ namespace StockMarketClient
     /// </summary>
     public partial class Registration : Window
     {
-        public Registration()
+        Window _parentWindow;
+        public Registration(Window parent)
         {
             InitializeComponent();
+            _parentWindow = parent;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -30,12 +32,13 @@ namespace StockMarketClient
                 member.EmailId = txtEmail.Text;
                 member.UserName = txtUsername.Text;
                 member.Password = txtPassword.Text;
-                service.Register(member);
-                if (member == null || member.Id == 0)
+                var memberResult = service.Register(member);
+                if (memberResult == null || memberResult.Id == 0)
                 {
                     return;
                 }
                 this.Hide();
+                _parentWindow.Show();
             }
             catch (Exception ex)
             {
@@ -53,6 +56,12 @@ namespace StockMarketClient
             else
                 txtUsername.Text = string.Empty;
 
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            this.Hide();
+            _parentWindow.Show();
         }
     }
 }

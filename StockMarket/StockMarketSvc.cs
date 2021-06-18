@@ -16,7 +16,7 @@ namespace StockMarket
     public class StockMarketSvc : IStockMarket
     {
         private readonly AdminOperation _adminOperation = new AdminOperation(new StockSevice(), new MarketDateOffService());
-        private readonly MemberOperation _memberOperation = new MemberOperation(new LoginService(), new OrderService(), new StockSevice());
+        private readonly MemberOperation _memberOperation = new MemberOperation(new LoginService(), new OrderService(), new StockSevice(), new AccountService(), new AccounTransactionHistoryService());
         private readonly StockMarketAvailablityProvider _stockMarketAvailablityProvider = new StockMarketAvailablityProvider();
         #region Admin Operations
         public Stock CreateStock(Stock stock)
@@ -97,6 +97,36 @@ namespace StockMarket
         public IEnumerable<Stock> GetSharesByName(string stockName)
         {
             return _memberOperation.GetSharesByName(stockName);
+        }
+
+        public Account AddMoney(int memberId, decimal amount)
+        {
+            return _memberOperation.AddMoney(memberId, amount);
+        }
+
+        public Account WithdrawMoney(int memberId, decimal amount)
+        {
+            return _memberOperation.WithdrawMoney(memberId, amount);
+        }
+
+        public IEnumerable<AccountTransactionHistory> GetTransaction(int accountId)
+        {
+            return _memberOperation.GetTransaction(accountId);
+        }
+
+        public IEnumerable<Order> GetOrders(int memberId)
+        {
+            return _memberOperation.GetOrders(memberId);
+        }
+
+        public Order GetOrder(int orderId)
+        {
+            return _memberOperation.GetOrder(orderId);
+        }
+
+        public Account GetAccount(int memberId)
+        {
+            return _memberOperation.GetAccount(memberId);
         }
 
         #endregion Member Operations

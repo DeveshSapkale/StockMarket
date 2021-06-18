@@ -31,8 +31,10 @@ namespace StockMarketClient.Client
         { First = 1, Next = 2, Previous = 3, Last = 4, PageCountChange = 5 };
 
         List<MemberHolding> myHoldings = new List<MemberHolding>();
+        Account _memberAccount = new Account();
 
-        public ClientDashBoard()
+
+        public ClientDashBoard(int memberId)
         {
             InitializeComponent();
             cbnumRec.Items.Add("10");
@@ -41,6 +43,7 @@ namespace StockMarketClient.Client
             cbnumRec.Items.Add("50");
             cbnumRec.Items.Add("100");
             cbnumRec.SelectedItem = 10;
+            lblMemberId.Content = memberId.ToString();
             this.Loaded += HoldingsTab_Loaded;
         }
 
@@ -50,14 +53,19 @@ namespace StockMarketClient.Client
             holdingsGrid.ItemsSource = myHoldings.Take(numberOfRecPerPage);
             int count = myHoldings.Take(numberOfRecPerPage).Count();
             lblPageInfo.Content = count + " of " + myHoldings.Count;
-            //txtProgress.Text = SimplePooling.LiveStocks.Count > 0 ? SimplePooling.LiveStocks[0].LivePrice.ToString(): "";
+
+            _memberAccount = LoadAccountDetails();
+            lblAmount.Content = _memberAccount.Amount.ToString();
+            lblAccountId.Content = _memberAccount.AccountId.ToString();
+            var transactionHistory = GetTransactionHistory();
+            transactionGrid.ItemsSource = transactionHistory;
         }
 
         private IEnumerable<MemberHolding> GetHoldings()
         {
             ServiceReference.StockMarketClient serviceReference = new ServiceReference.StockMarketClient();
 
-           return serviceReference.GetMemberHoldings(1);
+            return serviceReference.GetMemberHoldings(1);
         }
 
         private void Navigate(int mode)
@@ -161,11 +169,11 @@ namespace StockMarketClient.Client
         }
         private void btnViewStock_ClickEvents(object sender, RoutedEventArgs e)
         {
-           var stock =  stockSearchGrid.SelectedItem as Stock;
-           var memberHolding = myHoldings.SingleOrDefault(x => x.StockId == stock.Id);
+            var stock = stockSearchGrid.SelectedItem as Stock;
+            var memberHolding = myHoldings.SingleOrDefault(x => x.StockId == stock.Id);
             StockDetails stockDetails = new StockDetails(stock, memberHolding);
             stockDetails.Show();
-            
+
         }
 
         private void btnSellStock_ClickEvent(object sender, RoutedEventArgs e)
@@ -205,7 +213,7 @@ namespace StockMarketClient.Client
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-           
+
         }
 
         private void btnSearchStock_Click(object sender, RoutedEventArgs e)
@@ -222,12 +230,43 @@ namespace StockMarketClient.Client
 
         private void btnAddMoney_Click(object sender, RoutedEventArgs e)
         {
+            decimal amount = 0;
+            if (!Decimal.TryParse(txtAmount.Text, out amount))
+            {
+                MessageBox.Show("Please Enter valid Amount");
+            }
+            else
+            {
+                ServiceReference.StockMarketClient serviceReference = new ServiceReference.StockMarketClient();
+                var account = serviceReference.AddMoney(Convert.ToInt32(lblMemberId.Content), amount);
+                lblAmount.Content = $"{account.Amount} Rs";
+
+                transactionGrid.ItemsSource = null;
+                transactionGrid.ItemsSource = GetTransactionHistory();
+            }
 
         }
 
         private void btnWithdrawMoney_Click(object sender, RoutedEventArgs e)
         {
+            decimal inpAmount = 0;
+            if (!Decimal.TryParse(txtAmount.Text, out inpAmount))
+            {
+                MessageBox.Show("Please Enter valid Amount");
+            }
+            else if (inpAmount > Convert.ToDecimal(lblAmount.Content.ToString()))
+            {
+                MessageBox.Show("Withdraw limit exceeds Account amount.");
+            }
+            else
+            {
+                ServiceReference.StockMarketClient serviceReference = new ServiceReference.StockMarketClient();
+                var account = serviceReference.WithdrawMoney(Convert.ToInt32(lblMemberId.Content.ToString()), Convert.ToDecimal(txtAmount.Text));
+                lblAmount.Content = $"{account.Amount}";
 
+                transactionGrid.ItemsSource = null;
+                transactionGrid.ItemsSource = GetTransactionHistory();
+            }
         }
 
         private void btnNextCash_Click(object sender, RoutedEventArgs e)
@@ -253,6 +292,19 @@ namespace StockMarketClient.Client
         private void cbCashNumberOfRecords_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        private Account LoadAccountDetails()
+        {
+            ServiceReference.StockMarketClient serviceReference = new ServiceReference.StockMarketClient();
+            return serviceReference.GetAccount(int.Parse(lblMemberId.Content.ToString()));
+
+        }
+
+        private IEnumerable<AccountTransactionHistory> GetTransactionHistory()
+        {
+            ServiceReference.StockMarketClient serviceReference = new ServiceReference.StockMarketClient();
+            return serviceReference.GetTransaction(int.Parse(lblAccountId.Content.ToString()));
         }
     }
 }

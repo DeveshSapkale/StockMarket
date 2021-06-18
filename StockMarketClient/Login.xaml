@@ -11,8 +11,9 @@
         <TextBox x:Name="txtUsername" HorizontalAlignment="Left" Height="23" Margin="48,92,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="169"/>
         <Label Content="Password" HorizontalAlignment="Left" Margin="48,137,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="txtPassword" HorizontalAlignment="Left" Height="23" Margin="48,180,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="169"/>
-        <Button Content="Login" HorizontalAlignment="Left" Margin="79,248,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+        <Button Content="Login" HorizontalAlignment="Left" Margin="48,248,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
         <Label x:Name="lblError" Content="" HorizontalAlignment="Left" Margin="57,17,0,0" VerticalAlignment="Top" Width="126"/>
+        <Button x:Name="btnRegisterNavigation" Content="Register" HorizontalAlignment="Left" Margin="173,248,0,0" VerticalAlignment="Top" Width="75" Click="btnRegisterNavigation_Click"/>
 
     </Grid>
 </Window>

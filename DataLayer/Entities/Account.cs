@@ -17,8 +17,6 @@ namespace DataLayer.Entities
         [DataMember]
         public decimal Amount { get; set; }
         [DataMember]
-        public int MyProperty { get; set; }
-        [DataMember]
         public DateTime CreationDate { get; set; }
         [DataMember]
         public DateTime ModifiedDate { get; set; }

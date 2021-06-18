@@ -9,5 +9,11 @@ namespace BussinessLogic.Interface
         Member Register(Member member);
         IEnumerable<MemberHolding> MemberHoldings(int memberId);
         IEnumerable<Stock> GetSharesByName(string stockName);
+        Account AddMoney(int memberId, decimal amount);
+        Account WithdrawMoney(int memberId, decimal amount);
+        IEnumerable<AccountTransactionHistory> GetTransaction(int accountId);
+        IEnumerable<Order> GetOrders(int memberId);
+        Order GetOrder(int orderId);
+        Account GetAccount(int memberId);
     }
 }

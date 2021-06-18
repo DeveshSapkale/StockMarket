@@ -173,6 +173,8 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\DataLayer.Entities.Account.datasource" />
+    <None Include="Properties\DataSources\DataLayer.Entities.AccountTransactionHistory.datasource" />
     <None Include="Properties\DataSources\DataLayer.Entities.Member.datasource" />
     <None Include="Properties\DataSources\DataLayer.Entities.MemberHolding.datasource" />
     <None Include="Properties\DataSources\DataLayer.Entities.Order.datasource" />

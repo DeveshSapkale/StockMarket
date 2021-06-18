@@ -14,12 +14,16 @@ namespace BussinessLogic
         private readonly ILoginService _loginService;
         private readonly IOrderService _orderService;
         private readonly IStockService _stockService;
+        private readonly IAccountService _accountService;
+        private readonly IAccountTransactionHistoryService _accountTransactionHistoryService;
 
-        public MemberOperation(ILoginService loginService, IOrderService orderService, IStockService stockService)
+        public MemberOperation(ILoginService loginService, IOrderService orderService, IStockService stockService, IAccountService accountService, IAccountTransactionHistoryService accountTransactionHistoryService)
         {
             _loginService = loginService;
             _orderService = orderService;
             _stockService = stockService;
+            _accountService = accountService;
+            _accountTransactionHistoryService = accountTransactionHistoryService;
         }
 
         public Member Login(string userName, string password)
@@ -64,6 +68,36 @@ namespace BussinessLogic
         public IEnumerable<Stock> GetSharesByName(string stockName)
         {
             return _stockService.GetStocksByName(stockName);
+        }
+
+        public Account AddMoney(int memberId, decimal amount)
+        {
+           return _accountService.AddMoney(memberId, amount, TransactionStatus.MONEY_DEPOSITED);
+        }
+
+        public Account WithdrawMoney(int memberId, decimal amount)
+        {
+            return _accountService.DeductMoney(memberId, amount, TransactionStatus.MONEY_WITHDRAW);
+        }
+
+        public IEnumerable<AccountTransactionHistory> GetTransaction(int accountId)
+        {
+            return _accountTransactionHistoryService.GetTransaction(accountId);
+        }
+
+        public IEnumerable<Order> GetOrders(int memberId)
+        {
+            return _orderService.GetOrders(memberId);
+        }
+
+        public Order GetOrder(int orderId)
+        {
+            return _orderService.GetOrder(orderId);
+        }
+
+        public Account GetAccount(int memberId)
+        {
+          return  _accountService.GetAccount(memberId);
         }
     }
 }

@@ -14,6 +14,16 @@ namespace DataLayer
     {
         private static readonly ApplicationContext _db = new ApplicationContext();
 
+        public IEnumerable<Order> GetOrders(int memberId)
+        {
+            return _db.Orders.Where(x => x.MemberId == memberId);
+        }
+
+        public Order GetOrder(int orderId)
+        {
+            return _db.Orders.SingleOrDefault(x => x.OrderId == orderId);
+        }
+
         public Order PlaceOrder(Order order)
         {
             _db.Orders.Add(order);

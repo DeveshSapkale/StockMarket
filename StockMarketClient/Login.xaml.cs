@@ -47,10 +47,17 @@ namespace StockMarketClient
             }
             else
             {
-                ClientDashBoard clientDashBoard = new ClientDashBoard();
+                ClientDashBoard clientDashBoard = new ClientDashBoard(member.Id);
                 SimplePooling.Start();
                 clientDashBoard.Show();
             }
+        }
+
+        private void btnRegisterNavigation_Click(object sender, RoutedEventArgs e)
+        {
+            Registration registrationPage = new Registration(this);
+            registrationPage.Show();
+            this.Hide();
         }
     }
 }
