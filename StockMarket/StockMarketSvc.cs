@@ -68,7 +68,7 @@ namespace StockMarket
             if (!StockMarketAvailablityProvider.IsMarketAvailable())
                 throw new Exception("Martket is not available at those hours of the day");
 
-            return null;
+            return _memberOperation.SellShare(order);
         }
 
         public Order BuyShare(Order order)
@@ -76,7 +76,7 @@ namespace StockMarket
             if (!StockMarketAvailablityProvider.IsMarketAvailable())
                 throw new Exception("Martket is not available at those hours of the day");
 
-            return null;
+            return _memberOperation.BuyShare(order);
         }
 
         public StockMarketOffDates Add(StockMarketOffDates stockMarketOffDates)

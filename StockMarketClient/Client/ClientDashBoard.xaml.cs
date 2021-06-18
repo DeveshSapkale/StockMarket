@@ -65,7 +65,7 @@ namespace StockMarketClient.Client
         {
             ServiceReference.StockMarketClient serviceReference = new ServiceReference.StockMarketClient();
 
-            return serviceReference.GetMemberHoldings(1);
+            return serviceReference.GetMemberHoldings(Convert.ToInt32(lblMemberId.Content.ToString()));
         }
 
         private void Navigate(int mode)

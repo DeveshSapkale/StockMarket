@@ -52,17 +52,17 @@ namespace BussinessLogic
                 LiveStockDetailsProvider.CheckIfOrderCanBeResolved(order);
             }
 
-            return null;
+            return ord;
 
         }
 
-        public Order SellShare(Order ord)
+        public Order SellShare(Order order)
         {
-            ord.Status = OrderStatus.PENDING.ToString();
-            _orderService.PlaceOrder(ord);
+            order.Status = OrderStatus.PENDING.ToString();
+            var ord =  _orderService.PlaceOrder(order);
             LiveStockDetailsProvider.AddShareAsk(new StockTradeAsk() { OrderId = ord.OrderId, MemberId = ord.MemberId, StockId = ord.StockId, AskQuantity = ord.Quantity, AskUnitPrice = ord.UnitPrice });
             LiveStockDetailsProvider.LiveOrders.Add(ord);
-            return null;
+            return ord;
         }
 
         public IEnumerable<Stock> GetSharesByName(string stockName)

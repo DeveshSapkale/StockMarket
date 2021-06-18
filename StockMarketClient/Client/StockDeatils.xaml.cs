@@ -34,11 +34,15 @@ namespace StockMarketClient.Client
         private void btnBuyShare_Click(object sender, RoutedEventArgs e)
         {
             BuySellStock buySellStock = new BuySellStock(this, _memberHolding, false);
+            this.Hide();
+            buySellStock.Show();
         }
 
         private void btnSellShare_Click(object sender, RoutedEventArgs e)
         {
             BuySellStock buySellStock = new BuySellStock(this, _memberHolding, false);
+            this.Hide();
+            buySellStock.Show();
         }
     }
 }

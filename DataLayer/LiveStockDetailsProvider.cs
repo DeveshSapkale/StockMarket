@@ -30,6 +30,7 @@ namespace DataLayer
         private static void Init()
         {
             LiveStocks = new List<LiveStockDetails>();
+            LiveOrders = new List<Order>();
             foreach (var stock in _db.Stocks)
             {
                 LiveStocks.Add(new LiveStockDetails { 
@@ -47,6 +48,10 @@ namespace DataLayer
             foreach (var order in _db.Orders.Where(x => DbFunctions.TruncateTime(x.PurchaseTime) == DbFunctions.TruncateTime(DateTime.Today)))
             {
                 LiveOrders.Add(order);
+                if(order.OrderType == OrderType.BUY.ToString())
+                AddShareBid(new StockTradeBid { OrderId = order.OrderId, StockId = order.StockId, BidQuantity = order.Quantity, BidUnitPrice = order.UnitPrice, MemberId = order.MemberId });
+                else
+                AddShareAsk(new StockTradeAsk { OrderId = order.OrderId, StockId = order.StockId, AskQuantity = order.Quantity, AskUnitPrice = order.UnitPrice, MemberId = order.MemberId });
             }
 
             if (!RamdomPriceFluctuator.IsRunning)
@@ -79,6 +84,7 @@ namespace DataLayer
             {
                 SortedSet<StockTradeBid> sortedBidStock = new SortedSet<StockTradeBid>(new ByStocktradeBidDecending());
                 sortedBidStock.Add(stockTradeBid);
+                BidedOrder[stockTradeBid.StockId] = sortedBidStock;
             }
             else
             {
@@ -93,6 +99,7 @@ namespace DataLayer
             {
                 SortedSet<StockTradeAsk> sortedAskStock = new SortedSet<StockTradeAsk>(new ByStocktradeAskAcending());
                 sortedAskStock.Add(stockTradeAsk);
+                AskedOrder[stockTradeAsk.StockId] = sortedAskStock;
             }
             else
             {
@@ -146,65 +153,69 @@ namespace DataLayer
 
         public static bool CheckIfOrderCanBeResolved(Order order)
         {
-            var matchs = AskedOrder[order.StockId].Where(x => x.AskUnitPrice <= order.UnitPrice);
-
-            foreach (var askItem in matchs)
+            if (AskedOrder.ContainsKey(order.StockId))
             {
-                //Bid Fullfill
-                if(askItem.AskQuantity >= (order.Quantity - order.FulfilledQuatity))
+
+                var matchs = AskedOrder[order.StockId].Where(x => x.AskUnitPrice <= order.UnitPrice);
+
+                foreach (var askItem in matchs)
                 {
-                    order.FulfilledQuatity = order.Quantity;
-                    if(askItem.AskQuantity == order.Quantity)
+                    //Bid Fullfill
+                    if (askItem.AskQuantity >= (order.Quantity - order.FulfilledQuatity))
                     {
-                        _accountService.DeductMoney(order.MemberId, order.Quantity * order.UnitPrice, TransactionStatus.STOCK_BUY);
-                        _orderService.UpdateOrderStatus(order.OrderId, OrderStatus.COMPLETED.ToString());
-                        UpdateLiveOrder(order.OrderId, OrderStatus.COMPLETED, order.FulfilledQuatity);
+                        order.FulfilledQuatity = order.Quantity;
+                        if (askItem.AskQuantity == order.Quantity)
+                        {
+                            _accountService.DeductMoney(order.MemberId, order.Quantity * order.UnitPrice, TransactionStatus.STOCK_BUY);
+                            _orderService.UpdateOrderStatus(order.OrderId, OrderStatus.COMPLETED.ToString());
+                            UpdateLiveOrder(order.OrderId, OrderStatus.COMPLETED, order.FulfilledQuatity);
 
-                        RemoveShareBid(order.OrderId, order.StockId);
-                        
+                            RemoveShareBid(order.OrderId, order.StockId);
+
+                        }
+
+
+                        askItem.AskQuantity -= order.Quantity;
+                        if (askItem.AskQuantity == 0)
+                        {
+                            RemoveShareAsk(askItem.OrderId, askItem.StockId);
+                            _accountService.AddMoney(askItem.MemberId, order.Quantity * order.UnitPrice, TransactionStatus.STOCK_SELL);
+                            _orderService.UpdateOrderStatus(askItem.OrderId, OrderStatus.COMPLETED.ToString());
+                            UpdateLiveOrder(askItem.OrderId, OrderStatus.COMPLETED, order.FulfilledQuatity);
+                        }
+                        else
+                        {
+                            _orderService.UpdateOrderFulfilment(askItem.OrderId, order.FulfilledQuatity);
+                            _accountService.AddMoney(askItem.MemberId, askItem.AskQuantity * order.UnitPrice, TransactionStatus.STOCK_BUY);
+                            _orderService.UpdateOrderStatus(askItem.OrderId, OrderStatus.PARTIALLY_COMPLETED.ToString());
+                            UpdateLiveOrder(askItem.OrderId, OrderStatus.PARTIALLY_COMPLETED, order.FulfilledQuatity);
+                            UpdateShareAsk(askItem.OrderId, askItem.StockId, order.FulfilledQuatity);
+                        }
+                        return true;
                     }
-                    
-
-                    askItem.AskQuantity -= order.Quantity;
-                    if (askItem.AskQuantity == 0)
+                    else if (order.OrderValidity == OrderValidity.IMMEDIATE.ToString())
                     {
+                        _orderService.UpdateOrderStatus(order.OrderId, OrderStatus.FAILED.ToString());
+                        UpdateLiveOrder(order.OrderId, OrderStatus.FAILED, 0);
+                        return false;
+                    }
+                    //partial fullfill Bid case
+                    else if (askItem.AskQuantity < (order.Quantity - order.FulfilledQuatity))
+                    {
+                        //TODO
+                        order.FulfilledQuatity += askItem.AskQuantity;
+
                         RemoveShareAsk(askItem.OrderId, askItem.StockId);
-                        _accountService.AddMoney(askItem.MemberId, order.Quantity * order.UnitPrice, TransactionStatus.STOCK_SELL);
+                        _orderService.UpdateOrderFulfilment(askItem.OrderId, askItem.AskQuantity);
+
                         _orderService.UpdateOrderStatus(askItem.OrderId, OrderStatus.COMPLETED.ToString());
-                        UpdateLiveOrder(askItem.OrderId, OrderStatus.COMPLETED, order.FulfilledQuatity);
-                    }
-                    else
-                    {
-                        _orderService.UpdateOrderFulfilment(askItem.OrderId, order.FulfilledQuatity);
-                        _accountService.AddMoney(askItem.MemberId, askItem.AskQuantity * order.UnitPrice, TransactionStatus.STOCK_BUY);
-                        _orderService.UpdateOrderStatus(askItem.OrderId, OrderStatus.PARTIALLY_COMPLETED.ToString());
-                        UpdateLiveOrder(askItem.OrderId, OrderStatus.PARTIALLY_COMPLETED, order.FulfilledQuatity);
-                        UpdateShareAsk(askItem.OrderId, askItem.StockId, order.FulfilledQuatity);
-                    }
-                    return true;
-                }
-                else if(order.OrderValidity == OrderValidity.IMMEDIATE.ToString())
-                {
-                    _orderService.UpdateOrderStatus(order.OrderId, OrderStatus.FAILED.ToString());
-                    UpdateLiveOrder(order.OrderId, OrderStatus.FAILED, 0);
-                    return false;
-                }
-                //partial fullfill Bid case
-                else if(askItem.AskQuantity < (order.Quantity - order.FulfilledQuatity))
-                {
-                    //TODO
-                    order.FulfilledQuatity += askItem.AskQuantity;
+                        UpdateLiveOrder(askItem.OrderId, OrderStatus.COMPLETED, askItem.AskQuantity);
 
-                    RemoveShareAsk(askItem.OrderId, askItem.StockId);
-                    _orderService.UpdateOrderFulfilment(askItem.OrderId, askItem.AskQuantity);
-                    
-                    _orderService.UpdateOrderStatus(askItem.OrderId, OrderStatus.COMPLETED.ToString());
-                    UpdateLiveOrder(askItem.OrderId, OrderStatus.COMPLETED, askItem.AskQuantity);
-
-                    UpdateShareBid(order.OrderId, order.StockId, order.FulfilledQuatity);
-                    _orderService.UpdateOrderFulfilment(order.OrderId, order.FulfilledQuatity);
-                    _orderService.UpdateOrderStatus(order.OrderId, OrderStatus.PARTIALLY_COMPLETED.ToString());
-                    UpdateLiveOrder(order.OrderId, OrderStatus.PARTIALLY_COMPLETED, order.FulfilledQuatity);
+                        UpdateShareBid(order.OrderId, order.StockId, order.FulfilledQuatity);
+                        _orderService.UpdateOrderFulfilment(order.OrderId, order.FulfilledQuatity);
+                        _orderService.UpdateOrderStatus(order.OrderId, OrderStatus.PARTIALLY_COMPLETED.ToString());
+                        UpdateLiveOrder(order.OrderId, OrderStatus.PARTIALLY_COMPLETED, order.FulfilledQuatity);
+                    }
                 }
             }
             return false;
