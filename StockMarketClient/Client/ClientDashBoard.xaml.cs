@@ -239,7 +239,7 @@ namespace StockMarketClient.Client
             {
                 ServiceReference.StockMarketClient serviceReference = new ServiceReference.StockMarketClient();
                 var account = serviceReference.AddMoney(Convert.ToInt32(lblMemberId.Content), amount);
-                lblAmount.Content = $"{account.Amount} Rs";
+                lblAmount.Content = $"{account.Amount}";
 
                 transactionGrid.ItemsSource = null;
                 transactionGrid.ItemsSource = GetTransactionHistory();

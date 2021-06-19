@@ -42,7 +42,7 @@ namespace StockMarketClient.Client
             {
                 lblShareOperation.Content = "Sell Share";
                 btnBuySell.Content = "Verify Sell";
-                lblAvailableAmount.Visibility = Visibility.Hidden;
+                lblAvailableAmount.Visibility = Visibility.Visible;
                 lblShareCount.Content = $"{memberHolding.Quantity} shares available";
             }
             else

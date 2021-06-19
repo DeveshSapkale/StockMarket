@@ -12,12 +12,12 @@ using static DataLayer.Model.Misc;
 
 namespace DataLayer
 {
-   public static class LiveStockDetailsProvider
+    public static class LiveStockDetailsProvider
     {
         public static List<LiveStockDetails> LiveStocks { get; set; }
         private static readonly ApplicationContext _db = new ApplicationContext();
-        public static Dictionary<int , SortedSet<StockTradeAsk>> AskedOrder = new Dictionary<int, SortedSet<StockTradeAsk>>();
-        public static Dictionary<int , SortedSet<StockTradeBid>> BidedOrder = new Dictionary<int, SortedSet<StockTradeBid>>();
+        public static Dictionary<int, SortedSet<StockTradeAsk>> AskedOrder = new Dictionary<int, SortedSet<StockTradeAsk>>();
+        public static Dictionary<int, SortedSet<StockTradeBid>> BidedOrder = new Dictionary<int, SortedSet<StockTradeBid>>();
         public static List<Order> LiveOrders { get; set; }
         private static readonly OrderService _orderService = new OrderService();
         private static readonly AccountService _accountService = new AccountService();
@@ -33,14 +33,15 @@ namespace DataLayer
             LiveOrders = new List<Order>();
             foreach (var stock in _db.Stocks)
             {
-                LiveStocks.Add(new LiveStockDetails { 
-                CompanyName = stock.CompanyName,
-                Exchange = stock.Exchange,
-                Id = stock.Id,
-                InitialPrice = stock.InitialPrice,
-                Symbol = stock.Symbol,
-                Volume = stock.Volume,
-                CreationDate = stock.CreationDate
+                LiveStocks.Add(new LiveStockDetails
+                {
+                    CompanyName = stock.CompanyName,
+                    Exchange = stock.Exchange,
+                    Id = stock.Id,
+                    InitialPrice = stock.InitialPrice,
+                    Symbol = stock.Symbol,
+                    Volume = stock.Volume,
+                    CreationDate = stock.CreationDate
                 });
             }
 
@@ -48,10 +49,10 @@ namespace DataLayer
             foreach (var order in _db.Orders.Where(x => DbFunctions.TruncateTime(x.PurchaseTime) == DbFunctions.TruncateTime(DateTime.Today)))
             {
                 LiveOrders.Add(order);
-                if(order.OrderType == OrderType.BUY.ToString())
-                AddShareBid(new StockTradeBid { OrderId = order.OrderId, StockId = order.StockId, BidQuantity = order.Quantity, BidUnitPrice = order.UnitPrice, MemberId = order.MemberId });
+                if (order.OrderType == OrderType.BUY.ToString())
+                    AddShareBid(new StockTradeBid { OrderId = order.OrderId, StockId = order.StockId, BidQuantity = order.Quantity, BidUnitPrice = order.UnitPrice, MemberId = order.MemberId });
                 else
-                AddShareAsk(new StockTradeAsk { OrderId = order.OrderId, StockId = order.StockId, AskQuantity = order.Quantity, AskUnitPrice = order.UnitPrice, MemberId = order.MemberId });
+                    AddShareAsk(new StockTradeAsk { OrderId = order.OrderId, StockId = order.StockId, AskQuantity = order.Quantity, AskUnitPrice = order.UnitPrice, MemberId = order.MemberId });
             }
 
             if (!RamdomPriceFluctuator.IsRunning)
@@ -80,7 +81,7 @@ namespace DataLayer
 
         public static bool AddShareBid(StockTradeBid stockTradeBid)
         {
-            if(!BidedOrder.ContainsKey(stockTradeBid.StockId))
+            if (!BidedOrder.ContainsKey(stockTradeBid.StockId))
             {
                 SortedSet<StockTradeBid> sortedBidStock = new SortedSet<StockTradeBid>(new ByStocktradeBidDecending());
                 sortedBidStock.Add(stockTradeBid);
@@ -125,7 +126,7 @@ namespace DataLayer
         public static bool UpdateShareBid(int orderId, int stockId, int fulfilledQuantity)
         {
             var item = BidedOrder[stockId].Single(x => x.OrderId == orderId);
-            item.BidQuantity -= fulfilledQuantity ;
+            item.BidQuantity -= fulfilledQuantity;
             return true;
         }
 
@@ -171,9 +172,7 @@ namespace DataLayer
                             UpdateLiveOrder(order.OrderId, OrderStatus.COMPLETED, order.FulfilledQuatity);
 
                             RemoveShareBid(order.OrderId, order.StockId);
-
                         }
-
 
                         askItem.AskQuantity -= order.Quantity;
                         if (askItem.AskQuantity == 0)
@@ -229,10 +228,10 @@ namespace DataLayer
                 {
                     CheckIfOrderCanBeResolved(LiveOrders.SingleOrDefault(x => x.OrderId == orderItem.OrderId));
                 }
-                
+
             }
-               
-        } 
+
+        }
     }
 
 
@@ -244,14 +243,14 @@ namespace DataLayer
         {
             a = x.AskUnitPrice;
             b = y.AskUnitPrice;
-            
+
             if (a > b)
                 return 1;
             if (a < b)
                 return -1;
             else
                 return 0;
-            
+
         }
     }
 
